@@ -189,6 +189,9 @@ button:focus{
   height: 40%;
   margin: 0 auto;
   text-align: center;
+  display: inline-block;
+  align-content: center
+
 }
 .detailsContainer{
   width: 60%;
@@ -230,4 +233,9 @@ button:focus{
 }
 .AddPerson{
   margin: 25px 80px 0 0;
+}
+.TextModal{
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 10px;
 }

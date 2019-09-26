@@ -6,6 +6,8 @@ import Fade from '@material-ui/core/Fade';
 import {TextField,Button} from '@material-ui/core/';
 import { createMuiTheme, withStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/PersonAdd';
+import CheckUcin from'@material-ui/icons/Check';
+import CancelIcon from '@material-ui/icons/Clear'
 
 
 const useStyles = makeStyles(theme => ({
@@ -63,10 +65,30 @@ export default function TransitionsModal() {
         }}
       >
         <Fade in={open}>
-          <div className='ModalStyle'>
-            <h1 id="transition-modal-title">Confirmation code sent</h1>
-            <p id="transition-modal-description">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing</p>
+          <div  className='ModalStyle'>
+            <div className='TextModal'>
+            <h1>Confirmation code sent</h1>
+            <p >It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing</p>
             <p>Whait for 1 minute and click here to <a href="#">Resend the Confirmation code</a> </p>
+            </div>
+            <TextField
+              style={{width: '400px',}}
+               id="outlined-bare"
+                placeholder="XXX-XXX"
+                margin="dense"
+                variant="outlined"
+                inputProps={{ 'aria-label': 'bare' }}
+            />
+            <span className='d-flex justify-content-end mt-4'>
+        <Button  variant="outlined"  >
+          <CancelIcon className='mr-2'/>
+                  Cancel
+              </Button>
+              <Button style={{backgroundColor: '#000', color: '#fff'}} variant="outlined" color="default" className='ml-4 mr-5'>
+        <CheckUcin className='mr-2' />
+        Confirmer
+            </Button>
+    </span>
           </div>
         </Fade>
       </Modal>
