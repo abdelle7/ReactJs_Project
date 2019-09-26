@@ -1,0 +1,233 @@
+@import url('https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css');
+@import '../src/components/base.scss';
+.App {
+  height: 100vh;
+  display: flex;
+  color: white;
+}
+
+.App__Aside {
+  width: 50%;
+  background-color: #000;
+}
+.App__Aside img {
+  min-height: 100%;
+  min-width: 150%;
+  background-attachment: fixed;
+}
+
+.App__Form {
+  width: 50%;
+  background-color: white;
+  padding: 25px 40px;
+  overflow: auto;
+}
+
+.PageSwitcher {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10%;
+}
+
+.PageSwitcher__Item {
+  background-color: #4C5D72;
+  color: #9DA6B1;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-size: .9em;
+  border: none;
+  outline: none;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.PageSwitcher__Item--Active {
+  background-color: #5ED0C0;
+  color: white;
+}
+
+.PageSwitcher__Item:first-child {
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+.PageSwitcher__Item:last-child {
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.FormCenter {
+  margin-bottom: 100px;
+}
+
+.FormTitle {
+  color: #707C8B;
+  font-weight: 300;
+  margin-bottom: 50px;
+}
+
+.FormTitle__Link {
+  color: #707C8B;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.7em;
+  margin: 0 10px;
+  padding-bottom: 5px;
+}
+
+.FormTitle__Link:first-child {
+  margin-left: 0;
+}
+
+.FormTitle__Link--Active {
+  color: white;
+  border-bottom: 1px solid #199087;
+}
+
+.FormField {
+  margin-bottom: 40px;
+}
+
+.FormField__Label {
+  display: block;
+  text-transform: uppercase;
+  font-size: .9em;
+  color: black;
+}
+.FormField__Input {
+  width: 85%;
+  background-color: transparent;
+  border: none;
+  color: black;
+  outline: none;
+  border-bottom: 1px solid #445366;
+  font-size: 1em;
+  font-weight: 300;
+  padding-bottom: 10px;
+  margin-top: 10px;
+}
+
+.FormField__Input::placeholder {
+  color: #616E7F;
+}
+
+.FormField__Button {
+  background-color: #0A933F;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  padding: 15px 70px;
+  font-size: .8em;
+  font-weight: 500;
+}
+.linkoub{
+  margin-bottom: 40px;
+  margin-top: -20px;
+  display: flex;
+
+}
+.FormField__Button :focus {
+  background-color: #0A933F;
+}
+
+.FormField__Link {
+  color: #66707D;
+  text-decoration: none !important;
+  display: inline-block;
+  border-bottom: 1.5px solid #225E62;
+  padding-bottom: 5px;
+}
+.FormField__Link:hover {
+  color: #66707D;
+}
+.FormField__LinkDiable {
+  text-decoration: none !important;
+  color:white;
+  
+}
+.FormField__LinkDiable:hover {
+  color: white;
+}
+
+.FormField__CheckboxLabel {
+  color: #646F7D;
+  font-size: .9em;
+}
+
+.FormField__Checkbox {
+  position: relative;
+  top: 1.5px;
+}
+
+.FormField__TermsLink {
+  color: #002CB6;
+  border-bottom: 1px solid #002CB6;
+  text-decoration: none;
+  display: inline-block;
+  padding-bottom: 2px;
+  margin-left: 5px;
+}
+button:focus{
+  outline: none !important;
+}
+.Navli{
+  height: auto;
+  display: grid;
+  align-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.bgcolor{
+  background-color: #F4F7FD;
+  
+}
+.ModalStyle{
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 5px #727171;
+  width: 40%;
+  height: 40%;
+  margin: 0 auto;
+  text-align: center;
+}
+.detailsContainer{
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 120px;
+  color: black;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 5px #727171;
+  text-align: center; 
+  
+  
+
+}
+.FormCN{
+  display: inline-block;
+}
+.SpanLibel{
+
+}
+.labelCN{
+  margin-left:-20px;
+  width: 150px;
+}
+.rowCont{
+
+}
+.lastRow{
+  margin-bottom: 60px;
+}
+.Spanlb{
+  width: 200px;
+}
+.midRow{
+  
+}
+.MDBContainer{
+  margin-top: 40px;
+}
+.AddPerson{
+  margin: 25px 80px 0 0;
+}
