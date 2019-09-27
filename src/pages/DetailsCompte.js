@@ -47,8 +47,8 @@ const navLinks = [
 const HorizontalSidebar = ({ animation, direction, visible }) => (
     <Sidebar
       as={Segment}
-      animation={animation}
-      direction={direction}
+      animation='push'
+      direction='top'
       visible={visible}
       className=''
     >           <h2 style={{color:'black'}} className='float-left'>Detail Du Compte</h2>
@@ -65,11 +65,6 @@ const HorizontalSidebar = ({ animation, direction, visible }) => (
     </Sidebar>
   );
   
-  HorizontalSidebar.propTypes = {
-    animation: PropTypes.string,
-    direction: PropTypes.string,
-    visible: PropTypes.bool
-  };
 
 class DetailsCompte extends Component {
 
@@ -140,15 +135,25 @@ class DetailsCompte extends Component {
 
                 <div className="w-100">
                 <div>
-                <Sidebar.Pushable style={{height:'100px'}}
-                dimmed={dimmed && visible}>
-          {vertical ? (
-            <HorizontalSidebar
-              animation={animation}
-              direction={direction}
-              visible={visible}
-            />
-          ) : null}
+                <Sidebar.Pushable style={{height:'100px'}}>
+                  <Sidebar
+                    as={Segment}
+                    animation='push'
+                    direction='top'
+                    visible={visible}>
+                    <h2 style={{color:'black'}} className='float-left'>Detail Du Compte</h2>
+                  <span className='d-flex justify-content-end'>
+                      <Button  variant="outlined" onClick={this.handleAnimationChange('push')}  >
+                                Cancel
+                            </Button>
+                            <Button style={{backgroundColor: '#000', color: '#fff'}} variant="outlined" color="default" size="small" className='ml-2'>
+                      <SaveIcon className='mr-2' />
+                      Save
+                          </Button>
+                  </span>
+              
+                  </Sidebar>
+                        
           <div className='d-flex justify-content-between'>
                     <h1 style={{color: 'black', margin: '20px 0 0 20px '}}>Detail Du Compte</h1>
                 </div>
