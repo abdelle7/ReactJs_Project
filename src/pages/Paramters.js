@@ -9,17 +9,17 @@ const navLinks = [
     },
     {
         text: 'Platforms',
-        path: '/platforms',
+        path: '#',
         icon: 'ion-ios-megaphone'
     },
     {
-        text: 'Test',
-        path: '/test',
-        icon: 'ion-ios-business'
+        text: 'Back office',
+        path: '/backoffice',
+        icon: 'ion-ios-albums'
     },
     {
         text: 'Parameters',
-        path: '/parameters',
+        path: '#',
         icon: 'ion-ios-business'
     },
     

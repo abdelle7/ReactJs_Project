@@ -172,10 +172,11 @@ button:focus{
 }
 .Navli{
   height: auto;
-  display: grid;
   align-content: center;
   padding-top: 10px;
   padding-bottom: 10px;
+  list-style-type: none;
+  
 }
 .bgcolor{
   background-color: #F4F7FD;
@@ -239,3 +240,4 @@ button:focus{
   margin: 0 auto;
   margin-top: 10px;
 }
+

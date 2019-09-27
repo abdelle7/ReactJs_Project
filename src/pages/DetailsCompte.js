@@ -28,17 +28,17 @@ const navLinks = [
     },
     {
         text: 'Platforms',
-        path: '/platforms',
+        path: '#',
         icon: 'ion-ios-megaphone'
     },
     {
-        text: 'Test',
-        path: '/test',
-        icon: 'ion-ios-business'
+        text: 'Back office',
+        path: '/backoffice',
+        icon: 'ion-ios-albums'
     },
     {
         text: 'Parameters',
-        path: '/parameters',
+        path: '#',
         icon: 'ion-ios-business'
     },
     
@@ -53,7 +53,7 @@ const HorizontalSidebar = ({ animation, direction, visible }) => (
       className=''
     >           <h2 style={{color:'black'}} className='float-left'>Detail Du Compte</h2>
     <span className='d-flex justify-content-end'>
-        <Button  variant="outlined"  >
+        <Button  variant="outlined" onClick={Sidebar.visible=false}  >
                   Cancel
               </Button>
               <Button style={{backgroundColor: '#000', color: '#fff'}} variant="outlined" color="default" size="small" className='ml-2'>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Accordion from 'react-bootstrap/Accordion'
 
 function ResponsiveNavigation({ background, hoverBackground, linkColor, navLinks, logo }) {
   // eslint-disable-next-line
@@ -25,11 +26,13 @@ function ResponsiveNavigation({ background, hoverBackground, linkColor, navLinks
     return (
         <nav
             className="responsive-toolbar"
-            style={{ background: background }}>
+            style={{ background: background,listStyleType:'non' }}>
+              <Accordion defaultActiveKey="0">
             <ul
                 style={{ background: background }}
                 className={ navOpen ? 'active px-0' : 'px-0' }
             >
+              
                 {/*<figure className="image-logo" onClick={ () => { setNavOpen(!navOpen) } }>
                     <img src={ logo } height="40px" width="40px" alt="toolbar-logo" />
                 </figure>
@@ -66,6 +69,7 @@ function ResponsiveNavigation({ background, hoverBackground, linkColor, navLinks
         <MenuItem onClick={handleClose}>Passe en mode terminal</MenuItem>
       </Menu>
     </div>
+
                 { navLinks.map((link, index) => 
                     <li
                     className="Navli pl-5"
@@ -73,7 +77,8 @@ function ResponsiveNavigation({ background, hoverBackground, linkColor, navLinks
                         onMouseEnter={ () => { setHoverIndex(index) } }
                         onMouseLeave={ () => { setHoverIndex(-1) } }
                         style={{ background: hoverIndex === index ? (hoverBackground || '#999') : '' }}
-                    >
+                    > 
+                    <Accordion.Toggle as={Button} variant="link" eventKey={index}>
                         <Link
                             className="FormField__LinkDiable"
                             to={link.path}
@@ -81,24 +86,35 @@ function ResponsiveNavigation({ background, hoverBackground, linkColor, navLinks
                         >   { link.text }
                             <i className={`float-left pr-4 ${link.icon}`} />
                         </Link>
+                        </Accordion.Toggle>
                                             {(() => {
                             switch (link.text) {
                               case "Parameters":   return (
+                              <Accordion.Collapse eventKey={index}>
                               <ul className='Navli' key={ index }
                               onMouseEnter={ () => { setHoverIndex(index) } }
                               onMouseLeave={ () => { setHoverIndex(-1) } }
-                              style={{ background: hoverIndex === index ? (hoverBackground || '#999') : '' }}><li><Link style={{ color: linkColor,fontSize:"16px" }} to='/details'>Detail du compte</Link></li>
-                              <li><Link style={{ color: linkColor,fontSize:"16px" }} to='/users'>Utilisateurs</Link></li></ul>);
-                              case "Platforms": return (<ul className='Navli' key={ index }
+                              style={{ background: hoverIndex === index ? (hoverBackground || '#999') : '' }}>
+                              <li><Link style={{ color: linkColor,fontSize:"18px" }} to='/details'>Detail du compte</Link></li>
+                              <li style={{marginTop:'10px'}}><Link style={{ color: linkColor,fontSize:"18px" }} to='/users'>Utilisateurs</Link></li>
+                              </ul>
+                              </Accordion.Collapse>);
+                              case "Platforms": return (
+                                <Accordion.Collapse eventKey={index}>
+                              <ul className='Navli' key={ index }
                                 onMouseEnter={ () => { setHoverIndex(index) } }
                                 onMouseLeave={ () => { setHoverIndex(-1) } }
-                                style={{ background: hoverIndex === index ? (hoverBackground || '#fff') : '' }}><li>Test</li></ul>);
+                                style={{ background: hoverIndex === index ? (hoverBackground || '#fff') : '' }}>
+                                <li style={{listStyleType: 'non',color: 'green'}}><Link style={{ color: linkColor,fontSize:"18px" }} to='/test'>test</Link></li>
+                                </ul>
+                                </Accordion.Collapse>);
                               default:      return null;
                             }
                           })()}
                     </li>
                 )}
             </ul>
+            </Accordion>
         </nav>
     )
 }

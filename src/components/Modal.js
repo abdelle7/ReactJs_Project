@@ -69,7 +69,7 @@ export default function TransitionsModal() {
             <div className='TextModal'>
             <h1>Confirmation code sent</h1>
             <p >It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing</p>
-            <p>Whait for 1 minute and click here to <a href="#">Resend the Confirmation code</a> </p>
+            <p>Whait for 1 minute and click here to <a href="#" style={{fontSize: '17px',textDecoration: 'underline'}}>Resend the Confirmation code</a> </p>
             </div>
             <TextField
               style={{width: '400px',}}
@@ -80,7 +80,7 @@ export default function TransitionsModal() {
                 inputProps={{ 'aria-label': 'bare' }}
             />
             <span className='d-flex justify-content-end mt-4'>
-        <Button  variant="outlined"  >
+        <Button  variant="outlined" onClick={handleClose} >
           <CancelIcon className='mr-2'/>
                   Cancel
               </Button>

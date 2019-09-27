@@ -8,7 +8,7 @@ import Dashboard from './pages/Dashboard'
 import Platforms from './pages/Platforms'
 import DelailsCompte from './pages/DetailsCompte'
 import Users from './pages/Users';
-import Test from './pages/Test';
+import Backoffice from './pages/Backoffice';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -34,7 +34,7 @@ class App extends Component {
               <Route path="/users" component={Users} />
               <Route  path="/dashboard" component={Dashboard}></Route>
               <Route  path="/platforms" component={Platforms}></Route>
-              <Route  path="/test" component={Test}></Route>
+              <Route  path="/backoffice" component={Backoffice}></Route>
               </Switch>
         </div>
       </BrowserRouter>

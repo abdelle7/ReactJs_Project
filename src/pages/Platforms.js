@@ -9,17 +9,17 @@ const navLinks = [
     },
     {
         text: 'Platforms',
-        path: '/platforms',
+        path: '#',
         icon: 'ion-ios-megaphone'
     },
     {
-        text: 'Test',
-        path: '/test',
-        icon: 'ion-ios-business'
+        text: 'Back office',
+        path: '/backoffice',
+        icon: 'ion-ios-albums'
     },
     {
         text: 'Parameters',
-        path: '/parameters',
+        path: '#',
         icon: 'ion-ios-business'
     },
     
@@ -27,7 +27,7 @@ const navLinks = [
 class Platform extends Component {
     render () {
         return (
-            <div className="w-100 d-inline-flex">
+            <div className="bgcolor w-100 d-inline-flex">
                 <ResponsiveNavigation 
                 navLinks={ navLinks }
 				logo={ logo }
@@ -35,7 +35,12 @@ class Platform extends Component {
 				hoverBackground="#2E2E2E"
 				linkColor="#ffffff"
                 />
-                <div style={{color:'black'}}>Platform</div>
+                <div className="w-100">
+          <div className='d-flex justify-content-between'>
+                    <h1 style={{color: 'black', margin: '20px 0 0 20px '}}>Platforms</h1>
+                </div>
+                
+                </div>
             </div>
         )
     }

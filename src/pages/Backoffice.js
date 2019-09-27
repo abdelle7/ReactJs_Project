@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import ResponsiveNavigation from '../components/ResponsiveNavigation'
 import logo from '../logo.svg';
-
-
 const navLinks = [
     {
         text: 'Dashboard',
@@ -26,8 +24,7 @@ const navLinks = [
     },
     
 ]
-class Dashboard extends Component {
-
+class Backoffice extends Component {
     render () {
         return (
             <div className="bgcolor w-100 d-inline-flex">
@@ -40,14 +37,13 @@ class Dashboard extends Component {
                 />
                 <div className="w-100">
           <div className='d-flex justify-content-between'>
-                    <h1 style={{color: 'black', margin: '20px 0 0 20px '}}>Dashboard</h1>
+                    <h1 style={{color: 'black', margin: '20px 0 0 20px '}}>Back office</h1>
                 </div>
                 
                 </div>
             </div>
-            
         )
     }
 }
 
-export default Dashboard
+export default Backoffice

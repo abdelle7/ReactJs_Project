@@ -26,17 +26,17 @@ const navLinks = [
     },
     {
         text: 'Platforms',
-        path: '/platforms',
+        path: '#',
         icon: 'ion-ios-megaphone'
     },
     {
-        text: 'Test',
-        path: '/test',
-        icon: 'ion-ios-business'
+        text: 'Back office',
+        path: '/backoffice',
+        icon: 'ion-ios-albums'
     },
     {
         text: 'Parameters',
-        path: '/parameters',
+        path: '#',
         icon: 'ion-ios-business'
     },
     
@@ -58,6 +58,7 @@ class Users extends Component {
                     <h1 style={{color: 'black', margin: '20px 0 0 20px '}}>Utilisateurs</h1>
             <span className='AddPerson'><ModalPop></ModalPop></span>
                 </div>
+                
             
             <div className='mt-5' style={{width: '90%', margin: '0 auto'}}>
             <EnhancedTable></EnhancedTable>
