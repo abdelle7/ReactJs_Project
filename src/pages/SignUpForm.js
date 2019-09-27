@@ -49,7 +49,7 @@ class SignUpForm extends Component {
           <AppAside/>
             <div className="App__Form">
         <div className="FormCenter">
-            <h1 style={{color:'#000'}}>S'INSCRIRE</h1>
+            <h1 style={{color:'#000',marginBottom:'40px'}}>S'INSCRIRE</h1>
             <form onSubmit={this.handleSubmit} className="FormFields">
               <div className="FormField">
                 <label className="FormField__Label" htmlFor="name">Nom et Prenom</label>

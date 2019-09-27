@@ -38,7 +38,7 @@ class SignInForm extends Component {
           <AppAside/>
             <div className="App__Form">
             <div className="FormCenter">
-            <h1 style={{color:'#000'}}>CONNEXION</h1>
+            <h1 style={{color:'#000',marginBottom:'40px'}}>CONNEXION</h1>
 
             <form onSubmit={this.handleSubmit} className="FormFields">
 

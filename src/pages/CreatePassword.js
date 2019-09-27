@@ -42,7 +42,7 @@ class CreatePassword extends Component {
 
         <div className="FormCenter">
 
-            <h1 style={{color:'#000'}}>Créé un mot de passe</h1>
+            <h1 style={{color:'#000',marginBottom:'40px'}}>Créé un mot de passe</h1>
 
             <form onSubmit={this.handleSubmit} className="FormFields">
 
@@ -56,7 +56,7 @@ class CreatePassword extends Component {
               </div>
 
               <div className="FormField">
-                  <button className="FormField__Button mr-20"><Link to="/dashboard" className="FormField__LinkDiable" >Définir mot de passe</Link></button>
+                  <button className="FormField__Button mr-20"><Link style={{fontSize:'18px'}} to="/dashboard" className="FormField__LinkDiable" >Définir mot de passe</Link></button>
               </div>
             </form>
           </div>

@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Accordion from 'react-bootstrap/Accordion'
+import Image from "react-bootstrap/Image"
 
 function ResponsiveNavigation({ background, hoverBackground, linkColor, navLinks, logo }) {
   // eslint-disable-next-line
@@ -37,7 +38,7 @@ function ResponsiveNavigation({ background, hoverBackground, linkColor, navLinks
                     <img src={ logo } height="40px" width="40px" alt="toolbar-logo" />
                 </figure>
                 */}
-    <div>
+    <div style={{backgroundColor: "#535353"}}>
       <Button style={{
         backgroundColor: "#535353",
         color:"#fff",
@@ -45,8 +46,10 @@ function ResponsiveNavigation({ background, hoverBackground, linkColor, navLinks
         fontSize: "12px",
         borderRadius:"0px"
     }} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+          <Image src="https://www.w3schools.com/howto/img_avatar.png" style={{widows:'40px',height:'40px',marginRight:'10px'}} rounded />
         Ronnie Mendoza<br></br>lori.reid@mail.com
       </Button>
+
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}

@@ -53,7 +53,7 @@ const HorizontalSidebar = ({ animation, direction, visible }) => (
       className=''
     >           <h2 style={{color:'black'}} className='float-left'>Detail Du Compte</h2>
     <span className='d-flex justify-content-end'>
-        <Button  variant="outlined" onClick={Sidebar.visible=false}  >
+        <Button  variant="outlined"  >
                   Cancel
               </Button>
               <Button style={{backgroundColor: '#000', color: '#fff'}} variant="outlined" color="default" size="small" className='ml-2'>
@@ -72,7 +72,42 @@ const HorizontalSidebar = ({ animation, direction, visible }) => (
   };
 
 class DetailsCompte extends Component {
+
+  constructor(props) {
+    super(props);
+    // create a ref to store the textInput DOM element
+    this.refDeno = React.createRef();
+    this.refContact = React.createRef();
+    this.refTest = React.createRef();
+    this.refSite = React.createRef();
+
+    this.focus = this.focus.bind(this);
     
+  }
+  focus = num => () =>{
+    var animation='push';
+    switch (num) {
+      case 1:
+        this.refDeno.current.focus();
+        break;
+      case 2:
+          this.refContact.current.focus();
+        break;
+      case 3:
+            this.refTest.current.focus();
+        break;
+      case 4:
+              this.refSite.current.focus();
+        break;
+    
+      default:
+        break;
+    }
+    if (!this.state.visible) {
+      this.setState(prevState => ({ animation, visible: !prevState.visible }));
+    }
+  }
+
     state = {
     animation: "push",
     direction: "top",
@@ -88,12 +123,7 @@ class DetailsCompte extends Component {
   handleDirectionChange = direction => () =>
     this.setState({ direction, visible: false });
 
-    
-
-    constructor(){
-        super();
-        this.denominationIN=React.createRef();
-    }
+  
     render () {
         const { animation, dimmed, direction, visible } = this.state;
     const vertical = direction === "bottom" || direction === "top";
@@ -134,10 +164,11 @@ class DetailsCompte extends Component {
         <MDBCol  className=' pt-3 d-flex align-items-center'><label className='labelCN'>Dénomination</label>
         </MDBCol>
         <MDBCol className='align-items-center ml-5'><span >
-                            <TextField
-                            style={{width: '300px',}}
+                            <input
+                            className='mt-2'
+                            style={{width: '300px',height:'37px',border:'0'}}
                             id="outlined-bare"
-                            ref={this.denominationIN}
+                            ref={this.refDeno}
                             defaultValue="Dénomination"
                             margin="dense"
                             variant="outlined"
@@ -145,16 +176,18 @@ class DetailsCompte extends Component {
                         />
                         </span></MDBCol>
                         <MDBCol className='d-flex align-items-center'>
-                        <i className='ion-md-create' style={{cursor: 'pointer'}} onClick={this.handleAnimationChange("push")} />
+                        <i className='ion-md-create' style={{cursor: 'pointer'}} onClick={this.focus(1)} />
                         </MDBCol>
       </MDBRow>
       <MDBRow className='midRow'>
         <MDBCol className='pt-3 d-flex align-items-center'><label className='labelCN'>Contact</label>
         </MDBCol>
         <MDBCol className='align-items-center ml-5'><span >
-                            <TextField
-                            style={{width: '300px'}}
+                            <input
+                            className='mt-2'
+                            style={{width: '300px',height:'37px',border:'0'}}
                             id="outlined-bare"
+                            ref={this.refContact}
                             defaultValue="Contact"
                             margin="dense"
                             variant="outlined"
@@ -162,16 +195,18 @@ class DetailsCompte extends Component {
                         />
                         </span></MDBCol>
                         <MDBCol className='d-flex align-items-center'>
-                        <i className='ion-md-create' />
+                        <i className='ion-md-create' style={{cursor: 'pointer'}} onClick={this.focus(2)} />
                         </MDBCol>
       </MDBRow>
       <MDBRow className='midRow'>
         <MDBCol className=' pt-3 d-flex align-items-center'><label className='labelCN'>Lorem</label>
         </MDBCol>
         <MDBCol className='align-items-center ml-5'><span >
-                            <TextField
-                            style={{width: '300px'}}
+                          <input
+                            className='mt-2'
+                            style={{width: '300px',height:'37px',border:'0'}}
                             id="outlined-bare"
+                            ref={this.refTest}
                             defaultValue="Lorem"
                             margin="dense"
                             variant="outlined"
@@ -179,16 +214,18 @@ class DetailsCompte extends Component {
                         />
                         </span></MDBCol>
                         <MDBCol className='d-flex align-items-center'>
-                        <i className='ion-md-create' />
+                        <i className='ion-md-create' style={{cursor: 'pointer'}} onClick={this.focus(3)} />
                         </MDBCol>
       </MDBRow>
       <MDBRow className='lastRow'>
         <MDBCol className=' pt-3 d-flex align-items-center'><label className='labelCN'>Site WEB</label>
         </MDBCol>
         <MDBCol className='align-items-center ml-5'><span >
-                            <TextField
-                            style={{width: '300px'}}
+                          <input
+                            className='mt-2'
+                            style={{width: '300px',height:'37px',border:'0'}}
                             id="outlined-bare"
+                            ref={this.refSite}
                             defaultValue="Site WEB"
                             margin="dense"
                             variant="outlined"
@@ -196,7 +233,7 @@ class DetailsCompte extends Component {
                         />
                         </span></MDBCol>
                         <MDBCol className='d-flex align-items-center'>
-                        <i className='ion-md-create' />
+                        <i className='ion-md-create' style={{cursor: 'pointer'}} onClick={this.focus(4)} />
                         </MDBCol>
       </MDBRow>
     </MDBContainer>
