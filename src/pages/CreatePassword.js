@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import AppAside from './AppAside'
+import {stitchClient} from './const';
 
 import { Link } from 'react-router-dom';
-
+import {Stitch,UserPasswordAuthProviderClient} from 'mongodb-stitch-browser-sdk';
+const nom=localStorage.getItem('nom');
+const email=localStorage.getItem('email');
+const societe =localStorage.getItem('societe');
+const telephone =localStorage.getItem('telephone');
+const emailPasswordClient = stitchClient.auth
+  .getProviderClient(UserPasswordAuthProviderClient.factory);
+  const url = window.location.search;
+  const params = new URLSearchParams(url);
+  const token = params.get('token');
+  const tokenId = params.get('tokenId');
 class CreatePassword extends Component {
     constructor() {
         super();
@@ -29,8 +40,18 @@ class CreatePassword extends Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        console.log('The form was submitted with the following data:');
-        console.log(this.state);
+        if (this.state.password===this.state.passwordconf){
+          emailPasswordClient.registerWithEmail(email, this.state.password)
+          .then(() => {
+            console.log("Successfully sent account confirmation email!"+email+nom+this.state.password);
+            window.location = "/sign-in";
+        })
+          .catch(err => {
+            console.log("Error registering new user:", err);
+          });
+          }else{
+            console.log('password not matched');
+          }
     }
 
     render() {
@@ -56,7 +77,7 @@ class CreatePassword extends Component {
               </div>
 
               <div className="FormField">
-                  <button className="FormField__Button mr-20"><Link style={{fontSize:'18px'}} to="/dashboard" className="FormField__LinkDiable" >Définir mot de passe</Link></button>
+                  <button style={{fontSize: '18px'}} className="FormField__Button mr-20">Définir mot de passe</button>
               </div>
             </form>
           </div>

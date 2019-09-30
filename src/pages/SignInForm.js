@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import AppAside from './AppAside'
+import {stitchClient} from './const'
+import {Stitch,UserPasswordAuthProviderClient,UserPasswordCredential} from 'mongodb-stitch-browser-sdk';
+
+const app=Stitch.defaultAppClient;
 
 class SignInForm extends Component {
     constructor() {
@@ -14,6 +18,7 @@ class SignInForm extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+    
 
     handleChange(e) {
         let target = e.target;
@@ -27,9 +32,13 @@ class SignInForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-
-        console.log('The form was submitted with the following data:');
-        console.log(this.state);
+        const credential = new UserPasswordCredential(this.state.email,this.state.password)
+        stitchClient.auth.loginWithCredential(credential).then(authedUser => {
+          console.log(`successfully logged in with id: ${authedUser.id}`);
+          localStorage.setItem('email',this.state.email);
+          window.location = "/dashboard";
+        })
+.catch(err => console.error(`login failed with error: ${err}`))
     }
 
     render() {
@@ -43,7 +52,7 @@ class SignInForm extends Component {
             <form onSubmit={this.handleSubmit} className="FormFields">
 
             <div className="FormField">
-                <label className="FormField__Label" htmlFor="email">Adresse E-Mail</label>
+                <label className="FormField__Label" htmlFor="email">E-mail</label>
                 <input type="email" id="email" className="FormField__Input" placeholder="Entrez votre email" name="email" value={this.state.email} onChange={this.handleChange} />
               </div>
 
@@ -56,7 +65,8 @@ class SignInForm extends Component {
 
 
               <div className="FormField">
-                  <button className="FormField__Button mr-20"><Link style={{fontSize:'18px'}} to="/dashboard" className="FormField__LinkDiable" >Se connecter</Link></button> <Link to="/" className="FormField__Link">Créer un compte</Link>
+                  <button style={{fontSize: '18px'}} className="FormField__Button mr-20">Se connecter</button>
+                   <br></br><span style={{fontSize:'17px',color:'black',marginTop:'20px',display:'flex'}}>Vous n'avez pas de compte:&nbsp;<Link to="/"  className="FormField__LinkINS">S'inscrire</Link></span>
               </div>
             </form>
             </div>

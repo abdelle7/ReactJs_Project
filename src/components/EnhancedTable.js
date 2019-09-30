@@ -33,7 +33,6 @@ const rows = [
   createData(2567, 'rer@Exvivo.coud', 'sdf asdf', '(52)43562345'),
   createData(5672, 'qer@Exvivo.coud', 'dfg dfg', '(1234)354654632'),
   createData(1345, 'qwe@Exvivo.coud', 'dghfh gfdh', '(53)23454365'),
-  createData(6435, 'rew@Exvivo.coud', 'hgfdh ghd', '(234)456235'),
   createData(7562, 'rtt@Exvivo.coud', 'tyew dfg', '(423)4563423'),
   createData(7414, 'kjh@Exvivo.coud', 'rye ert', '(412)45364325'),
 ];

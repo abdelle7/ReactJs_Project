@@ -11,6 +11,7 @@ import Users from './pages/Users';
 import Backoffice from './pages/Backoffice';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import EmailConfirmation from './pages/EmailConfirmation'
 
 
 class App extends Component {
@@ -35,6 +36,7 @@ class App extends Component {
               <Route  path="/dashboard" component={Dashboard}></Route>
               <Route  path="/platforms" component={Platforms}></Route>
               <Route  path="/backoffice" component={Backoffice}></Route>
+              <Route path='/emailconfirmation' component={EmailConfirmation}></Route>
               </Switch>
         </div>
       </BrowserRouter>

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import AppAside from './AppAside'
+import AppAside from './AppAside';
+
 class SignUpForm extends Component {
+  
+  
     constructor() {
         super();
-
         this.state = {
             email: '',
             name: '',
@@ -20,10 +22,16 @@ class SignUpForm extends Component {
     }
 
     handlePageChange() {
-      if (this.state.name===''||this.state.email===''){
-        console.log('The form was submitted with the following data:');
+      if (this.state.name===''||this.state.email===''||this.state.societe===''||this.state.telephone===''){
+        console.log('error');
+
       }else{
-      window.location = "/CreatePassword";}
+        localStorage.setItem('email', this.state.email);
+        localStorage.setItem('nom', this.state.name);
+        localStorage.setItem('societe', this.state.societe);
+        localStorage.setItem('telephone', this.state.telephone);
+        window.location = "/CreatePassword";
+        }
     }
 
     handleChange(e) {
@@ -37,10 +45,17 @@ class SignUpForm extends Component {
     }
 
     handleSubmit(e) {
-        e.preventDefault();
+      e.preventDefault();
+      if (this.state.name===''||this.state.email===''||this.state.societe===''||this.state.telephone===''){
+        console.log('error');
 
-        console.log('The form was submitted with the following data:');
-        console.log(this.state);
+      }else{
+        localStorage.setItem('email', this.state.email);
+        localStorage.setItem('nom', this.state.name);
+        localStorage.setItem('societe', this.state.societe);
+        localStorage.setItem('telephone', this.state.telephone);
+        window.location = "/CreatePassword";
+        }
     }
 
     render() {
@@ -52,7 +67,7 @@ class SignUpForm extends Component {
             <h1 style={{color:'#000',marginBottom:'40px'}}>S'INSCRIRE</h1>
             <form onSubmit={this.handleSubmit} className="FormFields">
               <div className="FormField">
-                <label className="FormField__Label" htmlFor="name">Nom et Prenom</label>
+                <label className="FormField__Label" htmlFor="name">Nom Prénom</label>
                 <input type="text" id="name" className="FormField__Input" placeholder="Entrez votre nom et prenom" name="name" value={this.state.name} onChange={this.handleChange} />
               </div>
               {/*<div className="FormField">
@@ -60,7 +75,7 @@ class SignUpForm extends Component {
                 <input type="password" id="password" className="FormField__Input" placeholder="Entrez votre password" name="password" value={this.state.password} onChange={this.handleChange} />
         </div>*/}
               <div className="FormField">
-                <label className="FormField__Label" htmlFor="email">Adresse E-Mail</label>
+                <label className="FormField__Label" htmlFor="email">E-Mail</label>
                 <input type="email" id="email" className="FormField__Input" placeholder="Entrez votre email" name="email" value={this.state.email} onChange={this.handleChange} />
               </div>
               <div className="FormField">
@@ -79,7 +94,7 @@ class SignUpForm extends Component {
               </div>
 
               <div className="FormField">
-              <button onClick={this.handlePageChange} style={{backgroundColor:'#C59917'}} className="FormField__Button mr-20"><Link style={{fontSize:'18px'}} to="/CreatePassword" className="FormField__LinkDiable" >S'inscrire</Link></button>
+              <button style={{backgroundColor:'#C59917',fontSize: '18px'}} className="FormField__Button mr-20">S'inscrire</button>
               <Link  to="/sign-in" className="FormField__Link">Je suis déjà membre</Link>
               </div>
             </form>

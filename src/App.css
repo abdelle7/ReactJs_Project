@@ -54,7 +54,9 @@
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
 }
-
+.FormFields{
+  margin-left: 50px;
+}
 .FormCenter {
   margin-bottom: 100px;
 }
@@ -90,7 +92,8 @@
 .FormField__Label {
   display: block;
   text-transform: uppercase;
-  font-size: .9em;
+  font-size: 20px;
+  font-weight: bold;
   color: black;
 }
 .FormField__Input {
@@ -100,7 +103,7 @@
   color: black;
   outline: none;
   border-bottom: 1px solid #445366;
-  font-size: 1em;
+  font-size: 18px;
   font-weight: 300;
   padding-bottom: 10px;
   margin-top: 10px;
@@ -111,11 +114,11 @@
 }
 
 .FormField__Button {
-  background-color: #0A933F;
+  background-image: linear-gradient( #0CA045 10%,#0A8137 60%, #085E27 100% );
   color: white;
   border: none;
   outline: none;
-  border-radius: 25px;
+  border-radius: 35px;
   padding: 15px 70px;
   font-size: .8em;
   font-weight: 500;
@@ -176,7 +179,7 @@ button:focus{
   padding-top: 10px;
   padding-bottom: 10px;
   list-style-type: none;
-  
+
 }
 .bgcolor{
   background-color: #F4F7FD;

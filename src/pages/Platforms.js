@@ -18,7 +18,7 @@ const navLinks = [
         icon: 'ion-ios-albums'
     },
     {
-        text: 'Parameters',
+        text: 'Parametres',
         path: '#',
         icon: 'ion-ios-business'
     },

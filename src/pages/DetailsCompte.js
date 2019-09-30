@@ -37,7 +37,7 @@ const navLinks = [
         icon: 'ion-ios-albums'
     },
     {
-        text: 'Parameters',
+        text: 'Parametres',
         path: '#',
         icon: 'ion-ios-business'
     },
@@ -177,7 +177,7 @@ class DetailsCompte extends Component {
                             defaultValue="Dénomination"
                             margin="dense"
                             variant="outlined"
-                            inputProps={{ 'aria-label': 'bare' }}
+                            inputprops={{ 'aria-label': 'bare' }}
                         />
                         </span></MDBCol>
                         <MDBCol className='d-flex align-items-center'>
@@ -196,7 +196,7 @@ class DetailsCompte extends Component {
                             defaultValue="Contact"
                             margin="dense"
                             variant="outlined"
-                            inputProps={{ 'aria-label': 'bare' }}
+                            inputprops={{ 'aria-label': 'bare' }}
                         />
                         </span></MDBCol>
                         <MDBCol className='d-flex align-items-center'>
@@ -215,7 +215,7 @@ class DetailsCompte extends Component {
                             defaultValue="Lorem"
                             margin="dense"
                             variant="outlined"
-                            inputProps={{ 'aria-label': 'bare' }}
+                            inputprops={{ 'aria-label': 'bare' }}
                         />
                         </span></MDBCol>
                         <MDBCol className='d-flex align-items-center'>
@@ -234,7 +234,7 @@ class DetailsCompte extends Component {
                             defaultValue="Site WEB"
                             margin="dense"
                             variant="outlined"
-                            inputProps={{ 'aria-label': 'bare' }}
+                            inputprops={{ 'aria-label': 'bare' }}
                         />
                         </span></MDBCol>
                         <MDBCol className='d-flex align-items-center'>
