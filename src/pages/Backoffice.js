@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ResponsiveNavigation from '../components/ResponsiveNavigation'
 import logo from '../logo.svg';
+const email=localStorage.getItem('email');
 const navLinks = [
     {
         text: 'Dashboard',
@@ -25,6 +26,12 @@ const navLinks = [
     
 ]
 class Backoffice extends Component {
+    constructor(){
+        super();
+        if(email===null){
+        window.location = "/";
+        }
+    }
     render () {
         return (
             <div className="bgcolor w-100 d-inline-flex">

@@ -12,6 +12,8 @@ function ResponsiveNavigation({ background, hoverBackground, linkColor, navLinks
     const [ hoverIndex, setHoverIndex ] = useState(-1);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const email=localStorage.getItem('email');
+    const nom=localStorage.getItem('nom');
+
 
     const logout=() => {
       localStorage.clear();
@@ -49,7 +51,7 @@ function ResponsiveNavigation({ background, hoverBackground, linkColor, navLinks
         borderRadius:"0px"
     }} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
           <Image src="https://www.w3schools.com/howto/img_avatar.png" style={{widows:'40px',height:'40px',marginRight:'10px'}} rounded />
-        Ronnie Mendoza<br></br>{email}
+        {nom}<br></br>{email}
       </Button>
 
       <Menu

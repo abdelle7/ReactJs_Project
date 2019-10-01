@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 import AppAside from './AppAside';
 
 class SignUpForm extends Component {
@@ -65,6 +67,33 @@ class SignUpForm extends Component {
             <div className="App__Form">
         <div className="FormCenter">
             <h1 style={{color:'#000',marginBottom:'40px'}}>S'INSCRIRE</h1>
+            <Formik
+onSubmit={(values, { setSubmitting }) => {
+  setTimeout(() => {
+    alert(JSON.stringify(values, null, 2));
+    setSubmitting(false);
+  }, 500);
+}}
+validationSchema={Yup.object().shape({
+  email: Yup.string()
+    .email("L'Email doit être valide")
+    .required('Champs obligatoires'),
+  nom_prenom: Yup
+  .string()
+  .required("S'il vous plait entrez votre Nom et Prénom"),
+})}
+>
+{props => {
+  const {
+    values,
+    touched,
+    errors,
+    dirty,
+    handleChange,
+    handleBlur,
+
+  } = props;
+  return (
             <form onSubmit={this.handleSubmit} className="FormFields">
               <div className="FormField">
                 <label className="FormField__Label" htmlFor="name">Nom Prénom</label>
@@ -98,6 +127,9 @@ class SignUpForm extends Component {
               <Link  to="/sign-in" className="FormField__Link">Je suis déjà membre</Link>
               </div>
             </form>
+            );
+          }}
+          </Formik>
           </div>
           </div>
           </div>

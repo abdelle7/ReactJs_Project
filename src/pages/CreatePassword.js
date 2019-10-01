@@ -10,6 +10,17 @@ const societe =localStorage.getItem('societe');
 const telephone =localStorage.getItem('telephone');
 const emailPasswordClient = stitchClient.auth
   .getProviderClient(UserPasswordAuthProviderClient.factory);
+  // const userForm={
+  //   "aud": "eventdash-rezoi",
+  //   "exp": 1516239022,
+  //   "sub": "24601",
+  //   "_user": {
+  //     "nom_prenom": nom,
+  //     "telephon": telephone,
+  //     "email": email,
+  //     "societe": societe,
+  //   }
+  // }
   const url = window.location.search;
   const params = new URLSearchParams(url);
   const token = params.get('token');

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import ResponsiveNavigation from '../components/ResponsiveNavigation'
 import logo from '../logo.svg';
+const email=localStorage.getItem('email');
+
 
 
 const navLinks = [
@@ -27,6 +29,14 @@ const navLinks = [
     
 ]
 class Dashboard extends Component {
+    constructor(){
+        super();
+        if(email===null){
+        window.location = "/";
+        }
+    }
+
+
 
     render () {
         return (

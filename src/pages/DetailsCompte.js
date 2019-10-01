@@ -19,6 +19,7 @@ import {
   } from "semantic-ui-react";
 
 
+  const email=localStorage.getItem('email');
 
 const navLinks = [
     {
@@ -77,6 +78,10 @@ class DetailsCompte extends Component {
     this.refSite = React.createRef();
 
     this.focus = this.focus.bind(this);
+      if(email===null){
+      window.location = "/";
+      
+  }
     
   }
   focus = num => () =>{

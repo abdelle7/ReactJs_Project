@@ -19,6 +19,21 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import {stitchClient} from '../pages/const'
+import {RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
+
+const mongodb = stitchClient.getServiceClient(
+  RemoteMongoClient.factory,
+  "mongodb-atlas"
+);
+const db=mongodb.db('EventDash');
+const collection= db.collection('Utilisateur');
+const users=collection.find().toArray()
+.then(items => {
+  console.log(`Successfully found ${items.length} documents.`);
+  return items;
+})
+.catch(err => console.error(`Failed to find documents: ${err}`))
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
