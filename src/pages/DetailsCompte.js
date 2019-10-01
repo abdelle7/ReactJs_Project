@@ -92,12 +92,6 @@ class DetailsCompte extends Component {
       contact: '',
       lorem:'',
       site_web:'',
-      user: [{
-        denomination:'',
-        contact:'',
-        lorem:'',
-        site_web: '',
-      }],
   };
     // create a ref to store the textInput DOM element
     this.refDeno = React.createRef();
@@ -115,15 +109,30 @@ class DetailsCompte extends Component {
   }}
   componentDidMount(){
     this.display();
+    if(!window.location.hash) {
+      window.location = window.location + '#load';
+      window.location.reload();
+  }
   }
 
   display(){
     collection.findOne({ email: email }).then(function(_user){
         console.log(`email: ${_user.Denomination}`);
         if(_user.Denomination!==undefined){
-        this.setState({_user});}
+          localStorage.setItem('Deno',_user.Denomination);
+          localStorage.setItem('contact',_user.Contact);
+          localStorage.setItem('lorem',_user.Lorem);
+          localStorage.setItem('siteweb',_user.Site_WEB);
 
-    }).catch(err => console.error(`Failed to insert item: ${err}`));
+
+        this.setState({
+          denomination: _user.Denomination,
+          contact: _user.Contact,
+          lorem:_user.Lorem,
+          site_web:_user.Site_WEB,
+        });
+      }
+    }).catch(err => console.error(`setState: ${err}`));
   }
 
   focus = num => () =>{
@@ -169,7 +178,7 @@ class DetailsCompte extends Component {
       e.preventDefault();
 console.log('submite');
       const update = {
-        "$push": {
+        "$set": {
           "Denomination":this.state.denomination ,
           "Contact":this.state.contact ,
           "Lorem":this.state.lorem ,
@@ -178,9 +187,8 @@ console.log('submite');
       };
 
       collection.updateOne(query, update, options)
-      .then(
-        //this.display();
-        console.log("update")
+      .then(this.display
+
       )
       .catch(err => console.error(`Failed to add review: ${err}`))
         console.log('Test:',this.state.contact);
@@ -254,7 +262,7 @@ console.log('submite');
                             id="outlined-bare"
                             ref={this.refDeno}
                             name='denomination'
-                            Value='denomination'
+                            Value={localStorage.getItem('Deno')}
                             margin="dense"
                             variant="outlined"
                             onChange={this.handleChange}
@@ -275,7 +283,7 @@ console.log('submite');
                             id="outlined-bare"
                             ref={this.refContact}
                             name='contact'
-                            Value="Contact"
+                            Value={localStorage.getItem('contact')}
                             margin="dense"
                             variant="outlined"
                             onChange={this.handleChange}
@@ -296,7 +304,7 @@ console.log('submite');
                             id="outlined-bare"
                             ref={this.refTest}
                             name='lorem'
-                            defaultValue="Lorem"
+                            Value={localStorage.getItem('lorem')}
                             margin="dense"
                             variant="outlined"
                             onChange={this.handleChange}
@@ -317,7 +325,7 @@ console.log('submite');
                             id="outlined-bare"
                             ref={this.refSite}
                             name='site_web'
-                            Value="Site WEB"
+                            Value={localStorage.getItem('siteweb')}
                             margin="dense"
                             onChange={this.handleChange}
                             variant="outlined"
