@@ -2,22 +2,11 @@ import React, { Component } from 'react'
 import ResponsiveNavigation from '../components/ResponsiveNavigation'
 import logo from '../logo.svg';
 import EnhancedTable from '../components/EnhancedTable'
-import {TextField,Button} from '@material-ui/core/';
-import { createMuiTheme, withStyles, makeStyles } from '@material-ui/core/styles';
-import { green, purple } from '@material-ui/core/colors';
-
-import SaveIcon from '@material-ui/icons/PersonAdd';
-import { black, white } from 'ansi-colors';
 import ModalPop from '../components/Modal'
-const ColorButton = withStyles(theme => ({
-    root: {
-      color: '#fff',
-      backgroundColor: '#303030',
-      '&:hover': {
-        backgroundColor: '#000000',
-      },
-    },
-  }))(Button);
+
+const email=localStorage.getItem('email');
+
+
 const navLinks = [
     {
         text: 'Dashboard',
@@ -43,6 +32,13 @@ const navLinks = [
 ]
 
 class Users extends Component {
+    constructor(){
+        super();
+
+        if(email===null){
+        window.location = "/";
+        }
+    }
     render () {
         return (
             <div className="bgcolor w-100 d-inline-flex ">
