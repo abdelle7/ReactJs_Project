@@ -32,9 +32,15 @@ const navLinks = [
 ]
 
 class Users extends Component {
+componentDidMount(){
+    
+    if(!window.location.hash) {
+        window.location = window.location + '#load';
+        window.location.reload();
+    }
+}
     constructor(){
         super();
-
         if(email===null){
         window.location = "/";
         }

@@ -21,6 +21,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import {stitchClient} from '../pages/const'
 import {RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
+import { async } from 'q';
 
 const mongodb = stitchClient.getServiceClient(
   RemoteMongoClient.factory,
@@ -28,31 +29,37 @@ const mongodb = stitchClient.getServiceClient(
 );
 const db=mongodb.db('EventDash');
 const collection= db.collection('Utilisateur');
-const users=collection.find().toArray()
-.then(items => {
-  console.log(`Successfully found ${items.length} documents.`);
-  return items;
-})
-.catch(err => console.error(`Failed to find documents: ${err}`))
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+
+function createData(_id, nom_prenom, email, Societe, Telephone) {
+  return { _id, nom_prenom, email, Societe, Telephone };
 }
 
-const rows = [
-  createData(1234, 'IT@Exvivo.coud', 'IT Evivo','(212)12343124'),
-  createData(3423, 'asd@Exvivo.coud', 'asdfd asdd', '(212)32453455'),
-  createData(7563, 'wef@Exvivo.coud', 'asdf fds', '(865)34563245'),
-  createData(7652, 'eqe@Exvivo.coud', 'sf sadf', '(122)435623456'),
-  createData(3458, 'fse@Exvivo.coud', 'sdf ads', '(633)6543134'),
-  createData(2567, 'rer@Exvivo.coud', 'sdf asdf', '(52)43562345'),
-  createData(5672, 'qer@Exvivo.coud', 'dfg dfg', '(1234)354654632'),
-  createData(1345, 'qwe@Exvivo.coud', 'dghfh gfdh', '(53)23454365'),
-  createData(7562, 'rtt@Exvivo.coud', 'tyew dfg', '(423)4563423'),
-  createData(7414, 'kjh@Exvivo.coud', 'rye ert', '(412)45364325'),
-];
+
+const rowst=collection.find().toArray()
+.then(items => {
+  console.log(`Successfully found ${items.length} documents.`);
+  console.log(items);
+  items=Array.from(items);
+  localStorage.setItem('DataTable',JSON.stringify(items));
+  return items;
+})
+.catch(err => console.error(`Failed to find documents: ${err}`));
+
+function TestLocal(){
+  if (JSON.parse(localStorage.getItem('DataTable')) === null) {
+    const rows1=[];
+    return rows1
+ }else{
+    const rows1=JSON.parse(localStorage.getItem('DataTable'));
+    return rows1;
+ }
+}
+  const rows=Array.from(TestLocal());
+
 
 function desc(a, b, orderBy) {
+
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -77,10 +84,10 @@ function getSorting(order, orderBy) {
 }
 
 const headCells = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Num Compte' },
-  { id: 'calories', numeric: true, disablePadding: false, label: 'Email' },
-  { id: 'fat', numeric: true, disablePadding: false, label: 'Nom complet' },
-  { id: 'carbs', numeric: true, disablePadding: false, label: 'Téléphone' },
+  { id: '_id', numeric: false, disablePadding: true, label: 'Num Compte' },
+  { id: 'email', numeric: true, disablePadding: false, label: 'Email' },
+  { id: 'nom_prenom', numeric: true, disablePadding: false, label: 'Nom complet' },
+  { id: 'Telephone', numeric: true, disablePadding: false, label: 'Téléphone' },
 ];
 
 function EnhancedTableHead(props) {
@@ -163,7 +170,7 @@ const useStyles = makeStyles(theme => ({
 export default function EnhancedTable() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [orderBy, setOrderBy] = React.useState('nom_prenom');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -177,19 +184,19 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = event => {
     if (event.target.checked) {
-      const newSelecteds = rows.map(n => n.name);
+      const newSelecteds = rows.map(n => n._id);
       setSelected(newSelecteds);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, _id) => {
+    const selectedIndex = selected.indexOf(_id);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, _id);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -214,7 +221,7 @@ export default function EnhancedTable() {
   };
 
 
-  const isSelected = name => selected.indexOf(name) !== -1;
+  const isSelected = _id => selected.indexOf(_id) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -240,28 +247,28 @@ export default function EnhancedTable() {
               {stableSort(rows, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row._id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row.name)}
+                      onClick={event => handleClick(event, row._id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row._id}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
                         
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.name}
+                        {row._id}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
+                      <TableCell align="right">{row.email}</TableCell>
+                      <TableCell align="right">{row.nom_prenom}</TableCell>
+                      <TableCell align="right">{row.Telephone}</TableCell>
                     </TableRow>
                   );
                 })}
