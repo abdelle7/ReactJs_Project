@@ -17,9 +17,25 @@ import {
     Segment,
     Sidebar
   } from "semantic-ui-react";
+  import {stitchClient} from './const'
+import {RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
+
+const mongodb = stitchClient.getServiceClient(
+  RemoteMongoClient.factory,
+  "mongodb-atlas"
+);
+const db=mongodb.db('EventDash');
+const collection= db.collection('Utilisateur');
+const email=localStorage.getItem('email');
+collection.findOne({ email: email }).then(function(_user){
+  console.log(`email: ${_user.Denomination}`);
 
 
-  const email=localStorage.getItem('email');
+}).catch(err => console.error(`Failed to insert item: ${err}`));
+
+  const query = { "email": email };
+  const options = { "upsert": false };
+
 
 const navLinks = [
     {
@@ -58,8 +74,8 @@ const HorizontalSidebar = ({ animation, direction, visible }) => (
                   Cancel
               </Button>
               <Button style={{backgroundColor: '#000', color: '#fff'}} variant="outlined" color="default" size="small" className='ml-2'>
-        <SaveIcon className='mr-2' />
-        Save
+              <SaveIcon className='mr-2' />
+              Save
             </Button>
     </span>
               
@@ -71,19 +87,45 @@ class DetailsCompte extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      denomination: '',
+      contact: '',
+      lorem:'',
+      site_web:'',
+      user: [{
+        denomination:'',
+        contact:'',
+        lorem:'',
+        site_web: '',
+      }],
+  };
     // create a ref to store the textInput DOM element
     this.refDeno = React.createRef();
     this.refContact = React.createRef();
     this.refTest = React.createRef();
     this.refSite = React.createRef();
 
+    this.display = this.display.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.focus = this.focus.bind(this);
       if(email===null){
       window.location = "/";
       
+  }}
+  componentDidMount(){
+    this.display();
   }
-    
+
+  display(){
+    collection.findOne({ email: email }).then(function(_user){
+        console.log(`email: ${_user.Denomination}`);
+        if(_user.Denomination!==undefined){
+        this.setState({_user});}
+
+    }).catch(err => console.error(`Failed to insert item: ${err}`));
   }
+
   focus = num => () =>{
     var animation='push';
     switch (num) {
@@ -123,6 +165,38 @@ class DetailsCompte extends Component {
   handleDirectionChange = direction => () =>
     this.setState({ direction, visible: false });
 
+    handleSubmit(e) {
+      e.preventDefault();
+console.log('submite');
+      const update = {
+        "$push": {
+          "Denomination":this.state.denomination ,
+          "Contact":this.state.contact ,
+          "Lorem":this.state.lorem ,
+          "Site_WEB":this.state.site_web ,
+        }
+      };
+
+      collection.updateOne(query, update, options)
+      .then(
+        //this.display();
+        console.log("update")
+      )
+      .catch(err => console.error(`Failed to add review: ${err}`))
+        console.log('Test:',this.state.contact);
+
+    }
+
+    handleChange(e) {
+      let target = e.target;
+      let value = target.type === 'checkbox' ? target.checked : target.value;
+      let name = target.name;
+
+      this.setState({
+        [name]: value
+      });
+  }
+
   
     render () {
         const { animation, dimmed, direction, visible } = this.state;
@@ -139,6 +213,7 @@ class DetailsCompte extends Component {
 
 
                 <div className="w-100">
+                <form onSubmit={this.handleSubmit} >
                 <div>
                 <Sidebar.Pushable style={{height:'100px'}}>
                   <Sidebar
@@ -148,10 +223,10 @@ class DetailsCompte extends Component {
                     visible={visible}>
                     <h2 style={{color:'black'}} className='float-left'>Detail Du Compte</h2>
                   <span className='d-flex justify-content-end'>
-                      <Button  variant="outlined" onClick={this.handleAnimationChange('push')}  >
+                      <Button   variant="outlined" onClick={this.handleAnimationChange('push')}  >
                                 Cancel
                             </Button>
-                            <Button style={{backgroundColor: '#000', color: '#fff'}} variant="outlined" color="default" size="small" className='ml-2'>
+                            <Button type="Submit" style={{backgroundColor: '#000', color: '#fff'}} variant="outlined" color="default" size="small" className='ml-2'>
                       <SaveIcon className='mr-2' />
                       Save
                           </Button>
@@ -167,8 +242,7 @@ class DetailsCompte extends Component {
                 </div>
                 
                 <div className='detailsContainer'>
-                
-                    <form className='FormCN'>
+                    <span className='FormCN'>
                     <MDBContainer className='MDBContainer' >
       <MDBRow className='rowCont '>
         <MDBCol  className=' pt-3 d-flex align-items-center'><label className='labelCN'>Dénomination</label>
@@ -179,9 +253,11 @@ class DetailsCompte extends Component {
                             style={{width: '300px',height:'37px',border:'0'}}
                             id="outlined-bare"
                             ref={this.refDeno}
-                            defaultValue="Dénomination"
+                            name='denomination'
+                            Value='denomination'
                             margin="dense"
                             variant="outlined"
+                            onChange={this.handleChange}
                             inputprops={{ 'aria-label': 'bare' }}
                         />
                         </span></MDBCol>
@@ -198,9 +274,11 @@ class DetailsCompte extends Component {
                             style={{width: '300px',height:'37px',border:'0'}}
                             id="outlined-bare"
                             ref={this.refContact}
-                            defaultValue="Contact"
+                            name='contact'
+                            Value="Contact"
                             margin="dense"
                             variant="outlined"
+                            onChange={this.handleChange}
                             inputprops={{ 'aria-label': 'bare' }}
                         />
                         </span></MDBCol>
@@ -217,9 +295,11 @@ class DetailsCompte extends Component {
                             style={{width: '300px',height:'37px',border:'0'}}
                             id="outlined-bare"
                             ref={this.refTest}
+                            name='lorem'
                             defaultValue="Lorem"
                             margin="dense"
                             variant="outlined"
+                            onChange={this.handleChange}
                             inputprops={{ 'aria-label': 'bare' }}
                         />
                         </span></MDBCol>
@@ -236,8 +316,10 @@ class DetailsCompte extends Component {
                             style={{width: '300px',height:'37px',border:'0'}}
                             id="outlined-bare"
                             ref={this.refSite}
-                            defaultValue="Site WEB"
+                            name='site_web'
+                            Value="Site WEB"
                             margin="dense"
+                            onChange={this.handleChange}
                             variant="outlined"
                             inputprops={{ 'aria-label': 'bare' }}
                         />
@@ -247,12 +329,12 @@ class DetailsCompte extends Component {
                         </MDBCol>
       </MDBRow>
     </MDBContainer>
-                     </form>
+                     </span>
                     <span className='SpanLibel'></span>
                     
                 </div>
 
-
+                </form>
                 
                 
                 
