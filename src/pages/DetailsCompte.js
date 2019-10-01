@@ -27,11 +27,6 @@ const mongodb = stitchClient.getServiceClient(
 const db=mongodb.db('EventDash');
 const collection= db.collection('Utilisateur');
 const email=localStorage.getItem('email');
-collection.findOne({ email: email }).then(function(_user){
-  console.log(`email: ${_user.Denomination}`);
-
-
-}).catch(err => console.error(`Failed to insert item: ${err}`));
 
   const query = { "email": email };
   const options = { "upsert": false };
@@ -98,7 +93,7 @@ class DetailsCompte extends Component {
     this.refContact = React.createRef();
     this.refTest = React.createRef();
     this.refSite = React.createRef();
-
+    this.inputFocusNav=this.inputFocusNav.bind(this);
     this.display = this.display.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -109,21 +104,16 @@ class DetailsCompte extends Component {
   }}
   componentDidMount(){
     this.display();
-    if(!window.location.hash) {
-      window.location = window.location + '#load';
-      window.location.reload();
-  }
   }
 
-  display(){
-    collection.findOne({ email: email }).then(function(_user){
-        console.log(`email: ${_user.Denomination}`);
+  display() {
+    collection.findOne({ email: email }).then(_user => {
+        console.log(`Deno: ${_user.Denomination}`);
         if(_user.Denomination!==undefined){
           localStorage.setItem('Deno',_user.Denomination);
           localStorage.setItem('contact',_user.Contact);
           localStorage.setItem('lorem',_user.Lorem);
           localStorage.setItem('siteweb',_user.Site_WEB);
-
 
         this.setState({
           denomination: _user.Denomination,
@@ -131,8 +121,9 @@ class DetailsCompte extends Component {
           lorem:_user.Lorem,
           site_web:_user.Site_WEB,
         });
+
       }
-    }).catch(err => console.error(`setState: ${err}`));
+    }).catch(err => console.error(`Error: ${err}`));
   }
 
   focus = num => () =>{
@@ -154,9 +145,7 @@ class DetailsCompte extends Component {
       default:
         break;
     }
-    if (!this.state.visible) {
-      this.setState(prevState => ({ animation, visible: !prevState.visible }));
-    }
+    this.inputFocusNav();
   }
 
     state = {
@@ -187,11 +176,10 @@ console.log('submite');
       };
 
       collection.updateOne(query, update, options)
-      .then(this.display
-
-      )
+      .then(this.display)
       .catch(err => console.error(`Failed to add review: ${err}`))
         console.log('Test:',this.state.contact);
+        this.handleAnimationChange('push');
 
     }
 
@@ -203,6 +191,12 @@ console.log('submite');
       this.setState({
         [name]: value
       });
+  }
+  inputFocusNav(){
+    var animation='push';
+    if (!this.state.visible) {
+      this.setState(prevState => ({ animation, visible: !prevState.visible }));
+    }
   }
 
   
@@ -261,8 +255,9 @@ console.log('submite');
                             style={{width: '300px',height:'37px',border:'0'}}
                             id="outlined-bare"
                             ref={this.refDeno}
+                            onFocus={this.inputFocusNav}
                             name='denomination'
-                            Value={localStorage.getItem('Deno')}
+                            Value={this.state.denomination}
                             margin="dense"
                             variant="outlined"
                             onChange={this.handleChange}
@@ -283,7 +278,8 @@ console.log('submite');
                             id="outlined-bare"
                             ref={this.refContact}
                             name='contact'
-                            Value={localStorage.getItem('contact')}
+                            onFocus={this.inputFocusNav}
+                            Value={this.state.contact}
                             margin="dense"
                             variant="outlined"
                             onChange={this.handleChange}
@@ -304,7 +300,8 @@ console.log('submite');
                             id="outlined-bare"
                             ref={this.refTest}
                             name='lorem'
-                            Value={localStorage.getItem('lorem')}
+                            Value={this.state.lorem}
+                            onFocus={this.inputFocusNav}
                             margin="dense"
                             variant="outlined"
                             onChange={this.handleChange}
@@ -325,7 +322,8 @@ console.log('submite');
                             id="outlined-bare"
                             ref={this.refSite}
                             name='site_web'
-                            Value={localStorage.getItem('siteweb')}
+                            Value={this.state.site_web}
+                            onFocus={this.inputFocusNav}
                             margin="dense"
                             onChange={this.handleChange}
                             variant="outlined"
