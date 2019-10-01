@@ -87,6 +87,10 @@ class DetailsCompte extends Component {
       contact: '',
       lorem:'',
       site_web:'',
+      animation: "push",
+      direction: "top",
+      dimmed: false,
+      visible: false
   };
     // create a ref to store the textInput DOM element
     this.refDeno = React.createRef();
@@ -100,7 +104,6 @@ class DetailsCompte extends Component {
     this.focus = this.focus.bind(this);
       if(email===null){
       window.location = "/";
-      
   }}
   componentDidMount(){
     this.display();
@@ -128,6 +131,9 @@ class DetailsCompte extends Component {
 
   focus = num => () =>{
     var animation='push';
+    if (!this.state.visible) {
+      this.handleAnimationChange('push');
+    }
     switch (num) {
       case 1:
         this.refDeno.current.focus();
@@ -145,15 +151,8 @@ class DetailsCompte extends Component {
       default:
         break;
     }
-    this.inputFocusNav();
-  }
 
-    state = {
-    animation: "push",
-    direction: "top",
-    dimmed: false,
-    visible: false
-  };
+  }
 
   handleAnimationChange = animation => () =>
     this.setState(prevState => ({ animation, visible: !prevState.visible }));
@@ -163,7 +162,11 @@ class DetailsCompte extends Component {
   handleDirectionChange = direction => () =>
     this.setState({ direction, visible: false });
 
-    handleSubmit(e) {
+    
+    handleSubmit = (e) =>  {
+      var animation='push';
+      this.setState(prevState => ({ animation, visible: !prevState.visible }));
+      console.log('this',this);
       e.preventDefault();
 console.log('submite');
       const update = {
@@ -179,7 +182,6 @@ console.log('submite');
       .then(this.display)
       .catch(err => console.error(`Failed to add review: ${err}`))
         console.log('Test:',this.state.contact);
-        this.handleAnimationChange('push');
 
     }
 
