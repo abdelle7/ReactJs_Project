@@ -82,7 +82,7 @@ class CreatePassword extends Component {
               </div>
 
               <div className="FormField">
-                  <button style={{fontSize: '18px'}} className="FormField__Button mr-20">Définir mot de passe</button>
+                  <button style={{fontSize: '18px'}} className="FormField__ButtonSinup mr-20">Définir mot de passe</button>
               </div>
             </form>
           </div>

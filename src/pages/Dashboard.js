@@ -30,12 +30,7 @@ const navLinks = [
     
 ]
 class Dashboard extends Component {
-    constructor(){
-        super();
-        if(email===null){
-        window.location = "/";
-        }
-    }
+
 
 
 

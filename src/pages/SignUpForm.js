@@ -115,7 +115,7 @@ validationSchema={Yup.object().shape({
               </div>
 
               <div className="FormField">
-              <button style={{backgroundColor:'#C59917',fontSize: '18px'}} className="FormField__Button mr-20">S'inscrire</button>
+              <button className="FormField__ButtonSinup mr-20" style={{fontSize: '18px'}} >S'inscrire</button>
               <Link  to="/sign-in" className="FormField__Link">Je suis déjà membre</Link>
               </div>
             </form>

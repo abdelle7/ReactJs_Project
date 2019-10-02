@@ -13,6 +13,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import EmailConfirmation from './pages/EmailConfirmation';
 import DataTable from './pages/DataTable';
+import ProtectedRoutes from './components/ProtectedRoutes';
 
 
 class App extends Component {
@@ -25,20 +26,18 @@ class App extends Component {
                 <NavLink to="/sign-in" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Se connecter</NavLink>
                 <NavLink exact to="/" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">S'inscrire</NavLink>
     </div>*/}<Switch>
-              <Route exact path="/" component={SignUpForm}>
-              </Route>
-              <Route  path="/sign-in" component={SignInForm}>
-              </Route>
-              <Route  path="/CreatePassword" component={CreatePassword}></Route>
-              <Route  path="/parameters" component={Paramters}>
-              </Route>
-              <Route path="/details" component={DelailsCompte} />
-              <Route path="/users" component={Users} />
-              <Route  path="/dashboard" component={Dashboard}></Route>
-              <Route  path="/platforms" component={Platforms}></Route>
-              <Route  path="/backoffice" component={Backoffice}></Route>
+              <Route exact path="/" component={SignUpForm}></Route>
+              <Route  path="/sign-in" component={SignInForm}></Route>
               <Route path='/emailconfirmation' component={EmailConfirmation}></Route>
-              <Route path='/datatable' component={DataTable}></Route>
+              <Route  path="/CreatePassword" component={CreatePassword}></Route>
+              <ProtectedRoutes path="/dashboard" component={Dashboard} />
+              <ProtectedRoutes path="/parameters" component={Paramters} />
+              <ProtectedRoutes path="/details" component={DelailsCompte} />
+              <ProtectedRoutes path="/users" component={Users} />
+              <ProtectedRoutes path="/platforms" component={Platforms} />
+              <ProtectedRoutes path="/backoffice" component={Backoffice} />
+              <ProtectedRoutes path='/datatable' component={DataTable} />
+
               </Switch>
         </div>
       </BrowserRouter>
