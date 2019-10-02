@@ -85,7 +85,7 @@ function ResponsiveNavigation({ background, hoverBackground, linkColor, navLinks
                         onMouseLeave={ () => { setHoverIndex(-1) } }
                         style={{ background: hoverIndex === index ? (hoverBackground || '#999') : '' }}
                     > 
-                    <Accordion.Toggle as={Button} variant="link" eventKey={index}>
+                    <Accordion.Toggle as={Button} eventKey={index}>
                         <Link
                             className="FormField__LinkDiable"
                             to={link.path}

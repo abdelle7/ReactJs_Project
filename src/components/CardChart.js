@@ -87,7 +87,7 @@ const cardChartOpts1 = {
 }
 
 
-class cardChart extends React.Component {
+class CardChart extends React.Component {
 
   constructor(props) {
     super(props);
@@ -148,4 +148,4 @@ class cardChart extends React.Component {
         )
       }
 }
-export default cardChart;
+export default CardChart;

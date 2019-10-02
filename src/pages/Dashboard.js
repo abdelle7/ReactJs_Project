@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ResponsiveNavigation from '../components/ResponsiveNavigation'
-import TestComp from '../components/TestComp'
+import CardChart from '../components/CardChart'
 import logo from '../logo.svg';
 const email=localStorage.getItem('email');
 
@@ -53,7 +53,7 @@ class Dashboard extends Component {
           <div className='d-flex justify-content-between'>
                     <h1 style={{color: 'black', margin: '20px 0 0 20px '}}>Dashboard</h1>
                 </div>
-                <div style={{padding:'20px 0 0 20px'}}><TestComp/></div>
+                <div style={{padding:'20px 0 0 20px'}}><CardChart/></div>
                 
                 
                 
