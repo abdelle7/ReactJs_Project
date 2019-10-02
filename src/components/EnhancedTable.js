@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import {  makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,6 +9,30 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
+
+import {stitchClient} from '../pages/const'
+import {RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
+
+
+const mongodb = stitchClient.getServiceClient(
+  RemoteMongoClient.factory,
+  "mongodb-atlas"
+);
+const db=mongodb.db('EventDash');
+const collection= db.collection('Utilisateur');
+
+
+
+
+
+collection.find().toArray()
+.then(items => {
+  console.log(`Successfully found ${items.length} documents.`);
+  items=Array.from(items);
+  localStorage.setItem('DataTable',JSON.stringify(items));
+  return items;
+})
+.catch(err => console.error(`Failed to find documents: ${err}`));
 
 function TestLocal(){
   if (JSON.parse(localStorage.getItem('DataTable')) === null) {
