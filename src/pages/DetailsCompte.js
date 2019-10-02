@@ -168,7 +168,7 @@ class DetailsCompte extends Component {
       this.setState(prevState => ({ animation, visible: !prevState.visible }));
       console.log('this',this);
       e.preventDefault();
-console.log('submite');
+console.log('submit');
       const update = {
         "$set": {
           "Denomination":this.state.denomination ,
@@ -230,7 +230,7 @@ console.log('submite');
                       <Button   variant="outlined" onClick={this.handleAnimationChange('push')}  >
                                 Cancel
                             </Button>
-                            <Button type="Submit" style={{backgroundColor: '#000', color: '#fff'}} variant="outlined" color="default" size="small" className='ml-2'>
+                            <Button type="submit" style={{backgroundColor: '#000', color: '#fff'}} variant="outlined" color="default" size="small" className='ml-2'>
                       <SaveIcon className='mr-2' />
                       Save
                           </Button>
@@ -259,7 +259,7 @@ console.log('submite');
                             ref={this.refDeno}
                             onFocus={this.inputFocusNav}
                             name='denomination'
-                            Value={this.state.denomination}
+                            value={this.state.denomination}
                             margin="dense"
                             variant="outlined"
                             onChange={this.handleChange}
@@ -281,7 +281,7 @@ console.log('submite');
                             ref={this.refContact}
                             name='contact'
                             onFocus={this.inputFocusNav}
-                            Value={this.state.contact}
+                            value={this.state.contact}
                             margin="dense"
                             variant="outlined"
                             onChange={this.handleChange}
@@ -302,7 +302,7 @@ console.log('submite');
                             id="outlined-bare"
                             ref={this.refTest}
                             name='lorem'
-                            Value={this.state.lorem}
+                            value={this.state.lorem}
                             onFocus={this.inputFocusNav}
                             margin="dense"
                             variant="outlined"
@@ -324,7 +324,7 @@ console.log('submite');
                             id="outlined-bare"
                             ref={this.refSite}
                             name='site_web'
-                            Value={this.state.site_web}
+                            value={this.state.site_web}
                             onFocus={this.inputFocusNav}
                             margin="dense"
                             onChange={this.handleChange}

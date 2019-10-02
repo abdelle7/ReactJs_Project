@@ -15,7 +15,7 @@ const navLinks = [
     },
     {
         text: 'Platforms',
-        path: '/platforms',
+        path: '#',
         icon: 'ion-ios-megaphone'
     },
     {

@@ -112,7 +112,7 @@ function ResponsiveNavigation({ background, hoverBackground, linkColor, navLinks
                                 onMouseEnter={ () => { setHoverIndex(index) } }
                                 onMouseLeave={ () => { setHoverIndex(-1) } }
                                 style={{ background: hoverIndex === index ? (hoverBackground || '#fff') : '' }}>
-                                <li style={{listStyleType: 'non',color: 'green'}}><Link style={{ color: linkColor,fontSize:"18px" }} to='/test'>test</Link></li>
+                                <li style={{listStyleType: 'non',color: 'green'}}><Link style={{ color: linkColor,fontSize:"18px" }} to='/datatable'>test</Link></li>
                                 </ul>
                                 </Accordion.Collapse>);
                               default:      return null;

@@ -10,6 +10,7 @@
     "formik": "^1.5.8",
     "gh-pages": "^1.1.0",
     "ionic": "^5.4.1",
+    "material-table": "^1.51.0",
     "mdbreact": "^4.20.0",
     "mongodb-stitch-browser-sdk": "^4.5.0",
     "node-sass": "^4.12.0",
