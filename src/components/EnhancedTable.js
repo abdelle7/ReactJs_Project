@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { lighten, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,42 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
-import {stitchClient} from '../pages/const'
-import {RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
-import { async } from 'q';
-
-const mongodb = stitchClient.getServiceClient(
-  RemoteMongoClient.factory,
-  "mongodb-atlas"
-);
-const db=mongodb.db('EventDash');
-const collection= db.collection('Utilisateur');
-
-
-function createData(_id, nom_prenom, email, Societe, Telephone) {
-  return { _id, nom_prenom, email, Societe, Telephone };
-}
-
-
-const rowst=collection.find().toArray()
-.then(items => {
-  console.log(`Successfully found ${items.length} documents.`);
-  console.log(items);
-  items=Array.from(items);
-  localStorage.setItem('DataTable',JSON.stringify(items));
-  return items;
-})
-.catch(err => console.error(`Failed to find documents: ${err}`));
 
 function TestLocal(){
   if (JSON.parse(localStorage.getItem('DataTable')) === null) {
@@ -91,7 +55,7 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
+  const { classes, order, orderBy, onRequestSort } = props;
   const createSortHandler = property => event => {
     onRequestSort(event, property);
   };
@@ -173,7 +137,7 @@ export default function EnhancedTable() {
   const [orderBy, setOrderBy] = React.useState('nom_prenom');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
+  const [dense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(8);
 
   const handleRequestSort = (event, property) => {

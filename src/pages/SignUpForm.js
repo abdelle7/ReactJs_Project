@@ -84,15 +84,7 @@ validationSchema={Yup.object().shape({
 })}
 >
 {props => {
-  const {
-    values,
-    touched,
-    errors,
-    dirty,
-    handleChange,
-    handleBlur,
 
-  } = props;
   return (
             <form onSubmit={this.handleSubmit} className="FormFields">
               <div className="FormField">

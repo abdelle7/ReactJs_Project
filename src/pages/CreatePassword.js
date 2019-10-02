@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import AppAside from './AppAside'
 import {stitchClient} from './const';
 
-import { Link } from 'react-router-dom';
-import {Stitch,UserPasswordAuthProviderClient} from 'mongodb-stitch-browser-sdk';
+import {UserPasswordAuthProviderClient} from 'mongodb-stitch-browser-sdk';
 const nom=localStorage.getItem('nom');
 const email=localStorage.getItem('email');
-const societe =localStorage.getItem('societe');
-const telephone =localStorage.getItem('telephone');
 const emailPasswordClient = stitchClient.auth
   .getProviderClient(UserPasswordAuthProviderClient.factory);
   // const userForm={
@@ -21,10 +18,7 @@ const emailPasswordClient = stitchClient.auth
   //     "societe": societe,
   //   }
   // }
-  const url = window.location.search;
-  const params = new URLSearchParams(url);
-  const token = params.get('token');
-  const tokenId = params.get('tokenId');
+
 class CreatePassword extends Component {
     constructor() {
         super();

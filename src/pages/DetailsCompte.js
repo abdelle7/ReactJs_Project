@@ -1,22 +1,11 @@
 import React, { Component } from 'react'
-import PropTypes from "prop-types";
 import ResponsiveNavigation from '../components/ResponsiveNavigation'
 import logo from '../logo.svg';
 import 'semantic-ui-css/semantic.min.css'
-import {TextField,Button} from '@material-ui/core/';
+import {Button} from '@material-ui/core/';
 import SaveIcon from '@material-ui/icons/Save';
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
-import {
-    
-    Checkbox,
-    Grid,
-    Header,
-    Icon,
-    Image,
-    Menu,
-    Segment,
-    Sidebar
-  } from "semantic-ui-react";
+import {Segment,Sidebar} from "semantic-ui-react";
   import {stitchClient} from './const'
 import {RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
 
@@ -56,26 +45,26 @@ const navLinks = [
     
 ]
 
-const HorizontalSidebar = ({ animation, direction, visible }) => (
-    <Sidebar
-      as={Segment}
-      animation='push'
-      direction='top'
-      visible={visible}
-      className=''
-    >           <h2 style={{color:'black'}} className='float-left'>Detail Du Compte</h2>
-    <span className='d-flex justify-content-end'>
-        <Button  variant="outlined"  >
-                  Cancel
-              </Button>
-              <Button style={{backgroundColor: '#000', color: '#fff'}} variant="outlined" color="default" size="small" className='ml-2'>
-              <SaveIcon className='mr-2' />
-              Save
-            </Button>
-    </span>
+// const HorizontalSidebar = ({ animation, direction, visible }) => (
+//     <Sidebar
+//       as={Segment}
+//       animation='push'
+//       direction='top'
+//       visible={visible}
+//       className=''
+//     >           <h2 style={{color:'black'}} className='float-left'>Detail Du Compte</h2>
+//     <span className='d-flex justify-content-end'>
+//         <Button  variant="outlined"  >
+//                   Cancel
+//               </Button>
+//               <Button style={{backgroundColor: '#000', color: '#fff'}} variant="outlined" color="default" size="small" className='ml-2'>
+//               <SaveIcon className='mr-2' />
+//               Save
+//             </Button>
+//     </span>
               
-    </Sidebar>
-  );
+//     </Sidebar>
+//   );
   
 
 class DetailsCompte extends Component {
@@ -130,7 +119,6 @@ class DetailsCompte extends Component {
   }
 
   focus = num => () =>{
-    var animation='push';
     if (!this.state.visible) {
       this.handleAnimationChange('push');
     }
@@ -203,8 +191,7 @@ console.log('submit');
 
   
     render () {
-        const { animation, dimmed, direction, visible } = this.state;
-    const vertical = direction === "bottom" || direction === "top";
+        const {  visible } = this.state;
         return (
             <div className=" bgcolor w-100 d-inline-flex">
                 <ResponsiveNavigation 
@@ -219,13 +206,13 @@ console.log('submit');
                 <div className="w-100">
                 <form onSubmit={this.handleSubmit} >
                 <div>
-                <Sidebar.Pushable style={{height:'100px'}}>
+                <Sidebar.Pushable style={{height:'200px'}}>
                   <Sidebar
                     as={Segment}
                     animation='push'
                     direction='top'
                     visible={visible}>
-                    <h2 style={{color:'black'}} className='float-left'>Detail Du Compte</h2>
+                    <h1 style={{color: 'black', margin: '10px 0 0 6px '}}>Detail Du Compte</h1>
                   <span className='d-flex justify-content-end'>
                       <Button   variant="outlined" onClick={this.handleAnimationChange('push')}  >
                                 Cancel

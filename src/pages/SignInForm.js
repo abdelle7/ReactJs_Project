@@ -107,10 +107,8 @@ validationSchema={Yup.object().shape({
 >
 {props => {
   const {
-    values,
     touched,
     errors,
-    dirty,
     handleChange,
     handleBlur,
 
@@ -131,7 +129,7 @@ validationSchema={Yup.object().shape({
         [name]: value
       });
     }}
-      onBlur={handleBlur} />
+       />
 
                 {errors.email && touched.email && (
               <div style={{color:'red'}} className="input-feedback">{errors.email}</div>
@@ -151,7 +149,7 @@ validationSchema={Yup.object().shape({
         [name]: value
       });
     }}
-      onBlur={handleBlur} />
+       />
 
                 {errors.password && touched.password && (
               <div style={{color:'red'}} className="input-feedback">{errors.password}</div>
