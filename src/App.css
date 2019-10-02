@@ -1,5 +1,6 @@
 @import url('https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css');
 @import '../src/components/base.scss';
 .App {
   height: 100vh;
@@ -207,9 +208,6 @@ button:focus{
   border-radius: 8px;
   box-shadow: 0 0 5px #727171;
   text-align: center; 
-  
-  
-
 }
 .FormCN{
   display: inline-block;
