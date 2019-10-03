@@ -17,6 +17,13 @@ const mongodb = stitchClient.getServiceClient(
 );
 const db=mongodb.db('EventDash');
 const collection= db.collection('Utilisateur');
+const LoginError = (props) => {
+  if (props.display) {
+      return (<div style={{color:'red'}} id="results" className="search-results">
+      Email ou Mot de passe invalide
+    </div>)
+  }else return null
+};
 
 class SignInForm extends Component {
     constructor() {
@@ -24,7 +31,8 @@ class SignInForm extends Component {
 
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            display:false,
         };
 
         this.handleChangeMe = this.handleChangeMe.bind(this);
@@ -78,7 +86,10 @@ class SignInForm extends Component {
           });
           
         })
-.catch(err => console.error(`login failed with error: ${err}+${this.state.email}`))
+.catch(err => {
+  console.error(`login failed with error: ${err}+${this.state.email}`);
+  this.setState({display:true});
+})
     }
 
     render() {
@@ -88,6 +99,7 @@ class SignInForm extends Component {
             <div className="App__Form">
             <div className="FormCenter">
             <h1 style={{color:'#000',marginBottom:'40px'}}>CONNEXION</h1>
+            <LoginError display={this.state.display}/>
 
             <Formik
 onSubmit={(values, { setSubmitting }) => {

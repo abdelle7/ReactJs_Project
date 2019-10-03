@@ -19,13 +19,22 @@ const emailPasswordClient = stitchClient.auth
   //   }
   // }
 
+  const EmailConfSend = (props) => {
+    if (props.display) {
+        return (<div style={{color:'green'}} id="results" className="search-results">
+        Email de confirmation envoyer avec succès
+      </div>)
+    }else return null
+  };
+
 class CreatePassword extends Component {
     constructor() {
         super();
 
         this.state = {
             password: '',
-            passwordconf:''
+            passwordconf:'',
+            display:false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -49,7 +58,10 @@ class CreatePassword extends Component {
           emailPasswordClient.registerWithEmail(email, this.state.password)
           .then(() => {
             console.log("Successfully sent account confirmation email!"+email+nom+this.state.password);
-            window.location = "/sign-in";
+            this.setState({display:true});
+            window.setTimeout(function() {
+              window.location='/sign-in'
+                          }, 2000);
         })
           .catch(err => {
             console.log("Error registering new user:", err);
@@ -69,6 +81,7 @@ class CreatePassword extends Component {
         <div className="FormCenter">
 
             <h1 style={{color:'#000',marginBottom:'40px'}}>Créé un mot de passe</h1>
+            <EmailConfSend display={this.state.display}/>
 
             <form onSubmit={this.handleSubmit} className="FormFields">
 
