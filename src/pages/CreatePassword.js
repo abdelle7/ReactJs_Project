@@ -20,10 +20,14 @@ const emailPasswordClient = stitchClient.auth
   // }
 
   const EmailConfSend = (props) => {
-    if (props.display) {
-        return (<div style={{color:'green'}} id="results" className="search-results">
+    if (props.display==='Succes') {
+        return (<div style={{color:'green',fontWeight:'bold',fontSize:'15px'}} id="results" className="search-results">
         Email de confirmation envoyer avec succès
       </div>)
+    }else if(props.display==='NotMatch'){
+      return (<div style={{color:'red',fontWeight:'bold',fontSize:'15px'}} id="results" className="search-results">
+      Mot de passe et confirmation pas pareil
+    </div>)
     }else return null
   };
 
@@ -34,7 +38,7 @@ class CreatePassword extends Component {
         this.state = {
             password: '',
             passwordconf:'',
-            display:false
+            display:'nothing'
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -58,7 +62,7 @@ class CreatePassword extends Component {
           emailPasswordClient.registerWithEmail(email, this.state.password)
           .then(() => {
             console.log("Successfully sent account confirmation email!"+email+nom+this.state.password);
-            this.setState({display:true});
+            this.setState({display: "Succes"});
             window.setTimeout(function() {
               window.location='/sign-in'
                           }, 2000);
@@ -67,6 +71,7 @@ class CreatePassword extends Component {
             console.log("Error registering new user:", err);
           });
           }else{
+            this.setState({display: "NotMatch"});
             console.log('password not matched');
           }
     }

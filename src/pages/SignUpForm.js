@@ -14,7 +14,7 @@ class SignUpForm extends Component {
             name: '',
             societe:'',
             telephone:'',
-            hasAgreed: false
+            hasAgreed: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
