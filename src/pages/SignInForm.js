@@ -155,7 +155,7 @@ validationSchema={Yup.object().shape({
               <div style={{color:'red'}} className="input-feedback">{errors.password}</div>
             )}
               </div>
-              <Link to="/sign-in" className="linkoub">Mot de pass oublié</Link>
+              <Link to="/MotDePassOublie" className="linkoub">Mot de pass oublié</Link>
 
 
               <div className="FormField">

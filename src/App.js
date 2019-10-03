@@ -14,6 +14,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import EmailConfirmation from './pages/EmailConfirmation';
 import DataTable from './pages/DataTable';
 import ProtectedRoutes from './components/ProtectedRoutes';
+import MotDePassOublie from './pages/MotDePassOublie';
+import ResetPassword from './pages/ResetPassword';
+import ProtectedRouteLogin from './components/ProtectedRouteLogin'
 
 
 class App extends Component {
@@ -25,11 +28,23 @@ class App extends Component {
             {/*<div className="PageSwitcher">
                 <NavLink to="/sign-in" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Se connecter</NavLink>
                 <NavLink exact to="/" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">S'inscrire</NavLink>
-    </div>*/}<Switch>
+    </div>*/}
+    
+    <Switch>
+
               <Route exact path="/" component={SignUpForm}></Route>
               <Route  path="/sign-in" component={SignInForm}></Route>
               <Route path='/emailconfirmation' component={EmailConfirmation}></Route>
               <Route  path="/CreatePassword" component={CreatePassword}></Route>
+              <Route path="/MotDePassOublie" component={MotDePassOublie}/>
+              <Route path="/ResetPassword" component={ResetPassword}></Route>
+
+              {/* <ProtectedRouteLogin  path="/" component={SignUpForm} />
+              <ProtectedRouteLogin  path="/sign-in" component={SignInForm} />
+              <ProtectedRouteLogin  path='/emailconfirmation' component={EmailConfirmation} />
+              <ProtectedRouteLogin  path="/CreatePassword" component={CreatePassword} /> */}
+
+
               <ProtectedRoutes path="/dashboard" component={Dashboard} />
               <ProtectedRoutes path="/parameters" component={Paramters} />
               <ProtectedRoutes path="/details" component={DelailsCompte} />
