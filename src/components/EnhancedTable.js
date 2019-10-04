@@ -19,7 +19,7 @@ const mongodb = stitchClient.getServiceClient(
   RemoteMongoClient.factory,
   "mongodb-atlas"
 );
-const db=mongodb.db('EventDash');
+const db=mongodb.db('EventDashDB');
 const collection= db.collection('Utilisateur');
 
 
