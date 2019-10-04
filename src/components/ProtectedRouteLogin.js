@@ -14,8 +14,8 @@ class ProtectedRouteLogin extends Component {
           {...props} 
           render={props => (
             auth ?
-              <Component {...props} /> :
-              <Redirect to='/dashboard' />
+            <Redirect to='/dashboard' /> :
+            <Component {...props} /> 
           )} 
         />
       )

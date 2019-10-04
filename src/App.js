@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import SignUpForm from './pages/SignUpForm';
 import SignInForm from './pages/SignInForm';
 import CreatePassword from './pages/CreatePassword'
@@ -16,7 +16,7 @@ import DataTable from './pages/DataTable';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import MotDePassOublie from './pages/MotDePassOublie';
 import ResetPassword from './pages/ResetPassword';
-import ProtectedRouteLogin from './components/ProtectedRouteLogin'
+//import ProtectedRouteLogin from './components/ProtectedRouteLogin'
 
 const Session=localStorage.getItem('__stitch.client.eventdash-rezoi.auth_info');
         let auth=false;
@@ -57,6 +57,8 @@ class App extends Component {
               <ProtectedRoutes path="/platforms" component={Platforms} />
               <ProtectedRoutes path="/backoffice" component={Backoffice} />
               <ProtectedRoutes path='/datatable' component={DataTable} />
+
+              <Route render={() => <Redirect to={{pathname: "/sign-in"}} />} />
 
               </Switch>
         </div>

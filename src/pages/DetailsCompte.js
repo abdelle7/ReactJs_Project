@@ -66,7 +66,13 @@ const navLinks = [
 //     </Sidebar>
 //   );
   
-
+const LoginError = (props) => {
+  if (props.displaySucc) {
+      return (<div style={{color:'green',fontWeight:'bold'}} id="results" className="search-results pt-2">
+      modifié avec succès
+    </div>)
+  }else return null
+};
 class DetailsCompte extends Component {
 
   constructor(props) {
@@ -78,6 +84,7 @@ class DetailsCompte extends Component {
       site_web:'',
       animation: "push",
       direction: "top",
+      displaySucc:false,
       dimmed: false,
       visible: false
   };
@@ -167,7 +174,9 @@ console.log('submit');
       };
 
       collection.updateOne(query, update, options)
-      .then(this.display)
+      .then(
+        this.setState({displaySucc:true})
+      )
       .catch(err => console.error(`Failed to add review: ${err}`))
         console.log('Test:',this.state.contact);
 
@@ -215,11 +224,11 @@ console.log('submit');
                     <h1 style={{color: 'black', margin: '10px 0 0 6px '}}>Detail Du Compte</h1>
                   <span className='d-flex justify-content-end'>
                       <Button   variant="outlined" onClick={this.handleAnimationChange('push')}  >
-                                Cancel
+                      Annuler
                             </Button>
                             <Button type="submit" style={{backgroundColor: '#000', color: '#fff'}} variant="outlined" color="default" size="small" className='ml-2'>
                       <SaveIcon className='mr-2' />
-                      Save
+                      Modifier
                           </Button>
                   </span>
               
@@ -233,6 +242,7 @@ console.log('submit');
                 </div>
                 
                 <div className='detailsContainer'>
+                <LoginError displaySucc={this.state.displaySucc}/>
                     <span className='FormCN'>
                     <MDBContainer className='MDBContainer' >
       <MDBRow className='rowCont '>
