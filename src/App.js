@@ -18,8 +18,13 @@ import MotDePassOublie from './pages/MotDePassOublie';
 import ResetPassword from './pages/ResetPassword';
 import ProtectedRouteLogin from './components/ProtectedRouteLogin'
 
-
+const Session=localStorage.getItem('__stitch.client.eventdash-rezoi.auth_info');
+        let auth=false;
+        if (Session!==null) {
+            auth=true;
+        }
 class App extends Component {
+  
   render() {
     return (
       <BrowserRouter>
@@ -32,12 +37,12 @@ class App extends Component {
     
     <Switch>
 
-              <Route exact path="/" component={SignUpForm}></Route>
-              <Route  path="/sign-in" component={SignInForm}></Route>
-              <Route path='/emailconfirmation' component={EmailConfirmation}></Route>
-              <Route  path="/CreatePassword" component={CreatePassword}></Route>
-              <Route path="/MotDePassOublie" component={MotDePassOublie}/>
-              <Route path="/ResetPassword" component={ResetPassword}></Route>
+              <Route exact path="/" component={()=>auth?<Dashboard/> :<SignUpForm/>  }></Route>
+              <Route  path="/sign-in" component={()=>auth?<Dashboard/> :<SignInForm/>}></Route>
+              <Route path='/emailconfirmation' component={()=>auth?<Dashboard/> :<EmailConfirmation/>}></Route>
+              <Route  path="/CreatePassword" component={()=>auth?<Dashboard/> :<CreatePassword/>}></Route>
+              <Route path="/MotDePassOublie" component={()=>auth?<Dashboard/> :<MotDePassOublie/>}/>
+              <Route path="/ResetPassword" component={()=>auth?<Dashboard/> :<ResetPassword/> }></Route>
 
               {/* <ProtectedRouteLogin  path="/" component={SignUpForm} />
               <ProtectedRouteLogin  path="/sign-in" component={SignInForm} />

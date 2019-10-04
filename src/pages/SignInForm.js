@@ -149,7 +149,7 @@ validationSchema={Yup.object().shape({
               </div>
 
               <div className="FormField">
-                <label className="FormField__Label" htmlFor="password">passwordl</label>
+                <label className="FormField__Label" htmlFor="password">Mot De Passe</label>
                 <input type="password" id="password" className={`FormField__Input ${errors.password && touched.password ? 'text-input error' : 'text-input'}`} placeholder="Entrez votre Mot de passe" name="password" value={this.state.password} onBlur={handleBlur} onChange={e => {
         // call the built-in handleBur
         handleChange(e)
