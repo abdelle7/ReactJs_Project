@@ -18,7 +18,7 @@ import MotDePassOublie from './pages/MotDePassOublie';
 import ResetPassword from './pages/ResetPassword';
 //import ProtectedRouteLogin from './components/ProtectedRouteLogin'
 
-const Session=localStorage.getItem('__stitch.client.eventdash-rezoi.auth_info');
+const Session=localStorage.getItem('__stitch.client.eventappstitch-yrxdm.auth_info');
         let auth=false;
         if (Session!==null) {
             auth=true;
@@ -37,12 +37,12 @@ class App extends Component {
     
     <Switch>
 
-              <Route exact path="/" component={<SignUpForm/>  }></Route>
-              <Route  path="/sign-in" component={<SignInForm/>}></Route>
-              <Route path='/emailconfirmation' component={<EmailConfirmation/>}></Route>
-              <Route  path="/CreatePassword" component={<CreatePassword/>}></Route>
-              <Route path="/MotDePassOublie" component={<MotDePassOublie/>}/>
-              <Route path="/ResetPassword" component={<ResetPassword/> }></Route>
+              <Route exact path="/" component={()=>auth?<Dashboard/> :<SignUpForm/>  }></Route>
+              <Route  path="/sign-in" component={()=>auth?<Dashboard/> :<SignInForm/>}></Route>
+              <Route path='/emailconfirmation' component={()=>auth?<Dashboard/> :<EmailConfirmation/>}></Route>
+              <Route  path="/CreatePassword" component={()=>auth?<Dashboard/> :<CreatePassword/>}></Route>
+              <Route path="/MotDePassOublie" component={()=>auth?<Dashboard/> :<MotDePassOublie/>}/>
+              <Route path="/ResetPassword" component={()=>auth?<Dashboard/> :<ResetPassword/> }></Route>
 
               {/* <ProtectedRouteLogin  path="/" component={SignUpForm} />
               <ProtectedRouteLogin  path="/sign-in" component={SignInForm} />
@@ -50,13 +50,13 @@ class App extends Component {
               <ProtectedRouteLogin  path="/CreatePassword" component={CreatePassword} /> */}
 
 
-              <Route path="/dashboard" component={Dashboard} />
-              <Route path="/parameters" component={Paramters} />
-              <Route path="/details" component={DelailsCompte} />
-              <Route path="/users" component={Users} />
-              <Route path="/platforms" component={Platforms} />
-              <Route path="/backoffice" component={Backoffice} />
-              <Route path='/datatable' component={DataTable} />
+              <ProtectedRoutes path="/dashboard" component={Dashboard} />
+              <ProtectedRoutes path="/parameters" component={Paramters} />
+              <ProtectedRoutes path="/details" component={DelailsCompte} />
+              <ProtectedRoutes path="/users" component={Users} />
+              <ProtectedRoutes path="/platforms" component={Platforms} />
+              <ProtectedRoutes path="/backoffice" component={Backoffice} />
+              <ProtectedRoutes path='/datatable' component={DataTable} />
 
               <Route render={() => <Redirect to={{pathname: "/sign-in"}} />} />
 
