@@ -1,8 +1,6 @@
 import {combineReducers} from 'redux'
 import {stitchClient} from '../pages/const'
 import {RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
-import { async } from 'q';
-
 
 const mongodb = stitchClient.getServiceClient(
   RemoteMongoClient.factory,
