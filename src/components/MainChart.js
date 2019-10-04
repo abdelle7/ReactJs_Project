@@ -13,11 +13,11 @@ import {
   Row,
 } from 'reactstrap';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
-import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
+// import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 
-const brandSuccess = getStyle('--success')
-const brandInfo = getStyle('--info')
-const brandDanger = getStyle('--danger')
+// const brandSuccess = getStyle('--success')
+// const brandInfo = getStyle('--info')
+// const brandDanger = getStyle('--danger')
 
 // Card Chart 1
 function random(min, max) {

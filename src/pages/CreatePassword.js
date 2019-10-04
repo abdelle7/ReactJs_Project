@@ -28,6 +28,10 @@ const emailPasswordClient = stitchClient.auth
       return (<div style={{color:'red',fontWeight:'bold',fontSize:'15px'}} id="results" className="search-results">
       Mot de passe et confirmation pas pareil
     </div>)
+    }else if(props.display==='EmailExist'){
+      return (<div style={{color:'red',fontWeight:'bold',fontSize:'15px'}} id="results" className="search-results">
+      Email déjà utilisé
+    </div>)
     }else return null
   };
 
@@ -68,7 +72,10 @@ class CreatePassword extends Component {
                           }, 2000);
         })
           .catch(err => {
-            console.log("Error registering new user:", err);
+            if(err.message==='name already in use'){
+              this.setState({display: "EmailExist"});
+            }
+            console.log("Error registering new user:", err.message);
           });
           }else{
             this.setState({display: "NotMatch"});

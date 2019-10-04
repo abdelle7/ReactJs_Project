@@ -110,6 +110,7 @@ validationSchema={Yup.object().shape({
 
               <div className="FormField">
                 <label className="FormField__CheckboxLabel">
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <input className="FormField__Checkbox" type="checkbox" name="hasAgreed" value={this.state.hasAgreed} onChange={this.handleChange} /> Accepter les<a href="" className="FormField__TermsLink">conditions d'utilisation</a>
                 </label>
               </div>

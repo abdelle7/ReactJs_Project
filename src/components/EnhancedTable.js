@@ -9,6 +9,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
+import {connect} from 'react-redux'
 
 import {stitchClient} from '../pages/const'
 import {RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
@@ -28,7 +29,6 @@ const collection= db.collection('Utilisateur');
 collection.find().toArray()
 .then(items => {
   console.log(`Successfully found ${items.length} documents.`);
-  items=Array.from(items);
   localStorage.setItem('DataTable',JSON.stringify(items));
   return items;
 })
@@ -155,7 +155,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function EnhancedTable() {
+function EnhancedTable(props) {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('nom_prenom');
@@ -287,3 +287,7 @@ export default function EnhancedTable() {
     </div>
   );
 }
+const mapStatToPropd =(state)=>{
+  return {AllUsers: state.AllUsers};
+};
+export default connect(mapStatToPropd)(EnhancedTable);

@@ -3,7 +3,7 @@ import ResponsiveNavigation from '../components/ResponsiveNavigation'
 import CardChart from '../components/CardChart'
 import MainChart from '../components/MainChart'
 import logo from '../logo.svg';
-const email=localStorage.getItem('email');
+//const email=localStorage.getItem('email');
 
 
 
