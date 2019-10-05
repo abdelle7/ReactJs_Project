@@ -59,32 +59,13 @@ class SignInForm extends Component {
           console.log(`successfully logged in with id: ${authedUser.id}`);
           localStorage.setItem('email',this.state.email);
           collection.findOne({ email: this.state.email }).then(function(_user){
-            try {
               console.log(`email: ${_user.email}`);
               localStorage.setItem('telephone',_user.Telephone);
               localStorage.setItem('societe',_user.Societe);
               localStorage.setItem('nom',_user.nom_prenom);
               localStorage.setItem('email',_user.email);
               window.location = "/dashboard";
-
-            } catch (error) {
-              console.log(`email: Not Found`);
-              const user = {
-                "nom_prenom": nom,
-                "email": email,
-                "Societe": societe,
-                "Telephone": telephone,
-              };
-              collection.insertOne(user).then(result => {
-              console.log(`Successfully inserted item with _id: ${result.insertedId}`);
-              window.location = "/dashboard";
-            })
-              .catch(err => console.error(`Failed to insert item: ${err}`));
-              
-
-            }
           });
-          
         })
 .catch(err => {
   console.error(`login failed with error: ${err}+${this.state.email}`);

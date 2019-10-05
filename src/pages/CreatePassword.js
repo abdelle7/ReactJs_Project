@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 import AppAside from './AppAside'
 import {stitchClient} from './const';
+import {Stitch} from 'mongodb-stitch-browser-sdk';
 
+import {RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
+import {UserPasswordCredential} from 'mongodb-stitch-browser-sdk';
 import {UserPasswordAuthProviderClient} from 'mongodb-stitch-browser-sdk';
 const nom=localStorage.getItem('nom');
 const email=localStorage.getItem('email');
+const societe = localStorage.getItem('societe');
+const telephone = localStorage.getItem('telephone');
+const client = Stitch.defaultAppClient;
+
+const mongodb = stitchClient.getServiceClient(
+  RemoteMongoClient.factory,
+  "mongodb-atlas"
+);
+const db=mongodb.db('EventDash');
+const collection= db.collection('Utilisateur');
 const emailPasswordClient = stitchClient.auth
   .getProviderClient(UserPasswordAuthProviderClient.factory);
+
   // const userForm={
   //   "aud": "eventdash-rezoi",
   //   "exp": 1516239022,
@@ -18,6 +32,20 @@ const emailPasswordClient = stitchClient.auth
   //     "societe": societe,
   //   }
   // }
+  function Authetification(nom,email,societe,telephone){
+    const credential = new UserPasswordCredential('abdellah@exvivo.cloud','123456');
+    stitchClient.auth.loginWithCredential(credential).then(authedUser => {
+      stitchClient.callFunction("storeDB_user", [nom,email,societe,telephone]).then(result => {
+        console.log(result);
+        localStorage.clear();
+      })
+      console.log(`successfully logged in with id: ${authedUser.id}`);
+    })
+.catch(err => {
+console.error(`login failed with error: ${err}`);
+this.setState({display:true});
+})
+  }
 
   const EmailConfSend = (props) => {
     if (props.display==='Succes') {
@@ -65,11 +93,12 @@ class CreatePassword extends Component {
         if (this.state.password===this.state.passwordconf){
           emailPasswordClient.registerWithEmail(email, this.state.password)
           .then(() => {
+            Authetification(nom,email,societe,telephone);
             console.log("Successfully sent account confirmation email!"+email+nom+this.state.password);
             this.setState({display: "Succes"});
-            window.setTimeout(function() {
-              window.location='/sign-in'
-                          }, 2000);
+            // window.setTimeout(function() {
+            //   window.location='/sign-in'
+            //               }, 2000);
         })
           .catch(err => {
             if(err.message==='name already in use'){

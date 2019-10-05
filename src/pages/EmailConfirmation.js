@@ -42,7 +42,6 @@ class EmailConfirmation extends Component {
             <h1 style={{fontSize:'40px',color:'#000',marginBottom:'40px'}}>Confirmation Email</h1>
             <div style={{textAlign:'center',fontSize:'30px',color:'black',margin: '0 auto',width:'650px',marginTop:'200px'}}>vous serez redirigé vers la page de connexion en 3 secondes</div>
 
-
             
           </div>
           </div>
