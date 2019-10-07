@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import ResponsiveNavigation from '../components/ResponsiveNavigation'
-import logo from '../logo.svg';
+
 import 'semantic-ui-css/semantic.min.css'
 import {Button} from '@material-ui/core/';
 import SaveIcon from '@material-ui/icons/Save';
@@ -20,31 +19,6 @@ const email=localStorage.getItem('email');
 
   const query = { "email": email };
   const options = { "upsert": false };
-
-
-const navLinks = [
-    {
-        text: 'Dashboard',
-        path: '/dashboard',
-        icon: 'ion-ios-home'
-    },
-    {
-        text: 'Platforms',
-        path: '#',
-        icon: 'ion-ios-megaphone'
-    },
-    {
-        text: 'Back office',
-        path: '/backoffice',
-        icon: 'ion-ios-albums'
-    },
-    {
-        text: 'Parametres',
-        path: '#',
-        icon: 'ion-ios-settings'
-    },
-    
-]
 
 // const HorizontalSidebar = ({ animation, direction, visible }) => (
 //     <Sidebar
@@ -204,14 +178,6 @@ console.log('submit');
         const {  visible } = this.state;
         return (
             <div className=" bgcolor w-100 d-inline-flex">
-                <ResponsiveNavigation 
-                navLinks={ navLinks }
-				logo={ logo }
-				background="#000"
-				hoverBackground="#2E2E2E"
-				linkColor="#ffffff"
-                />
-
 
                 <div className="w-100">
                 <form onSubmit={this.handleSubmit} >

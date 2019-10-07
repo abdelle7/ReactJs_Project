@@ -18,19 +18,53 @@ import MotDePassOublie from './pages/MotDePassOublie';
 import ResetPassword from './pages/ResetPassword';
 import {StitchAuthInfo} from './pages/const';
 //import ProtectedRouteLogin from './components/ProtectedRouteLogin'
+import ResponsiveNavigation from './components/ResponsiveNavigation'
+import logo from './logo.svg';
+
+const navLinks = [
+    {
+        text: 'Dashboard',
+        path: '/dashboard',
+        icon: 'ion-ios-home'
+    },
+    {
+        text: 'Platforms',
+        path: '#',
+        icon: 'ion-ios-megaphone'
+    },
+    {
+        text: 'Back office',
+        path: '/backoffice',
+        icon: 'ion-ios-albums'
+    },
+    {
+        text: 'Parametres',
+        path: '#',
+        icon: 'ion-ios-settings'
+    },
+    
+]
 
 const Session=localStorage.getItem(StitchAuthInfo);
         let auth=false;
         if (Session!==null) {
             auth=true;
         }
+
+      let navHeader = auth ? <ResponsiveNavigation 
+      navLinks={ navLinks }
+      logo={ logo }
+      background="#000"
+      hoverBackground="#2E2E2E"
+      linkColor="#ffffff"
+        /> : '';
 class App extends Component {
   
   render() {
     return (
       <BrowserRouter>
         <div className="App">
-          
+          {navHeader}
             {/*<div className="PageSwitcher">
                 <NavLink to="/sign-in" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Se connecter</NavLink>
                 <NavLink exact to="/" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">S'inscrire</NavLink>
