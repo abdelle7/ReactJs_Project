@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {Route ,Redirect} from "react-router-dom";
+import {StitchAuthInfo} from '../pages/const';
+
 
 class ProtectedRoute extends Component {
     render() {
       const { component: Component, ...props } = this.props;
-      const Session=localStorage.getItem('__stitch.client.eventappstitch-yrxdm.auth_info');
+      const Session=localStorage.getItem(StitchAuthInfo);
         let auth=false;
         if (Session!==null) {
             auth=true;

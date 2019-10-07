@@ -6,16 +6,13 @@ import AppAside from './AppAside'
 import {stitchClient} from './const'
 import {RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
 import {UserPasswordCredential} from 'mongodb-stitch-browser-sdk';
+import {DataBase} from './const';
 
-const nom = localStorage.getItem('nom');
-const societe = localStorage.getItem('societe');
-const telephone = localStorage.getItem('telephone');
-const email = localStorage.getItem('email');
 const mongodb = stitchClient.getServiceClient(
   RemoteMongoClient.factory,
   "mongodb-atlas"
 );
-const db=mongodb.db('EventDashDB');
+const db=mongodb.db(DataBase);
 const collection= db.collection('Utilisateur');
 const LoginError = (props) => {
   if (props.display) {

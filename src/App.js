@@ -16,9 +16,10 @@ import DataTable from './pages/DataTable';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import MotDePassOublie from './pages/MotDePassOublie';
 import ResetPassword from './pages/ResetPassword';
+import {StitchAuthInfo} from './pages/const';
 //import ProtectedRouteLogin from './components/ProtectedRouteLogin'
 
-const Session=localStorage.getItem('__stitch.client.eventappstitch-yrxdm.auth_info');
+const Session=localStorage.getItem(StitchAuthInfo);
         let auth=false;
         if (Session!==null) {
             auth=true;

@@ -8,12 +8,13 @@ import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import {Segment,Sidebar} from "semantic-ui-react";
   import {stitchClient} from './const'
 import {RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
+import {DataBase} from './const';
 
 const mongodb = stitchClient.getServiceClient(
   RemoteMongoClient.factory,
   "mongodb-atlas"
 );
-const db=mongodb.db('EventDashDB');
+const db=mongodb.db(DataBase);
 const collection= db.collection('Utilisateur');
 const email=localStorage.getItem('email');
 

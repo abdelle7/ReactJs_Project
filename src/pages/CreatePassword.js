@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import AppAside from './AppAside'
 import {stitchClient} from './const';
-import {Stitch,UserApiKeyCredential,RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
+import {UserApiKeyCredential,RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
 import {UserPasswordAuthProviderClient} from 'mongodb-stitch-browser-sdk';
+import {DataBase} from './const';
 const nom=localStorage.getItem('nom');
 const email=localStorage.getItem('email');
 const societe = localStorage.getItem('societe');
@@ -12,7 +13,7 @@ const mongodb = stitchClient.getServiceClient(
   RemoteMongoClient.factory,
   "mongodb-atlas"
 );
-const db=mongodb.db('EventDashDB');
+const db=mongodb.db(DataBase);
 const collection= db.collection('Utilisateur');
 const emailPasswordClient = stitchClient.auth
   .getProviderClient(UserPasswordAuthProviderClient.factory);

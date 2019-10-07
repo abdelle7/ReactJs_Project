@@ -19,6 +19,7 @@ function fetch(){
     })
     .catch(err => console.error(`Failed to find documents: ${err}`));
 }
+
 function TestLocal(){
     if (JSON.parse(localStorage.getItem('DataTable')) === null) {
         const rows1=[];

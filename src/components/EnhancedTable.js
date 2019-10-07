@@ -10,6 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
 import {connect} from 'react-redux'
+import {DataBase} from '../pages/const';
 
 
 import {stitchClient} from '../pages/const'
@@ -20,7 +21,7 @@ const mongodb = stitchClient.getServiceClient(
   RemoteMongoClient.factory,
   "mongodb-atlas"
 );
-const db=mongodb.db('EventDashDB');
+const db=mongodb.db(DataBase);
 const collection= db.collection('Utilisateur');
 
 
