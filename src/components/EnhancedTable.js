@@ -34,7 +34,7 @@ collection.find().toArray()
   localStorage.setItem('DataTable',JSON.stringify(items));
   return items;
 })
-.catch(err => console.error(`Failed to find documents: ${err}`));
+.catch(err => console.error(`(This is Not Error) Failed to find documents: ${err}`));
 
 function TestLocal(){
   if (JSON.parse(localStorage.getItem('DataTable')) === null) {

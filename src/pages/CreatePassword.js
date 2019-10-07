@@ -3,7 +3,7 @@ import AppAside from './AppAside'
 import {stitchClient} from './const';
 import {UserApiKeyCredential,RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
 import {UserPasswordAuthProviderClient} from 'mongodb-stitch-browser-sdk';
-import {DataBase} from './const';
+import {DataBase,ADMIN} from './const';
 const nom=localStorage.getItem('nom');
 const email=localStorage.getItem('email');
 const societe = localStorage.getItem('societe');
@@ -30,7 +30,7 @@ const emailPasswordClient = stitchClient.auth
   //   }
   // }
   function Authetification(nom,email,societe,telephone){
-    const credential = new UserApiKeyCredential("fb5hwMH3ZysLx4TXF862zBY8xZppleZORD0IVgH0rk8u2VFdjZVzpT8jlSYchzfg")
+    const credential = new UserApiKeyCredential(ADMIN)
     const user = {
       "nom_prenom": nom,
       "email": email,
@@ -38,19 +38,17 @@ const emailPasswordClient = stitchClient.auth
       "Telephone": telephone,
     };
     stitchClient.auth.loginWithCredential(credential).then(authedUser => {
-      stitchClient.callFunction("storeDB_user", [nom,email,societe,telephone]).then(result => {
-        collection.insertOne(user).then(result => {
+
+      collection.insertOne(user).then(result => {
           console.log(result);
           localStorage.clear();
+          window.location = "/sign-in";
         }).catch(err => console.error(`Failed to insert item: ${err}`));
-      })
-      console.log(`successfully logged in with id: ${authedUser.id}`);
     })
-.catch(err => {
-console.error(`login failed with error: ${err}`);
-this.setState({display:true});
-})
-
+    .catch(err => {
+    console.error(`login failed with error: ${err}`);
+    this.setState({display:true});
+    })
   }
 
   const EmailConfSend = (props) => {
