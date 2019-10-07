@@ -204,7 +204,7 @@ validationSchema={Yup.object().shape({
       this.setState({
         [name]: value
       });
-    }} /> Accepter les<a href="" className="FormField__TermsLink">conditions d'utilisation</a>
+    }} /> Accepter les<a href="/#" className="FormField__TermsLink">conditions d'utilisation</a>
                 </label>
                 {errors.hasAgreed && touched.hasAgreed && (
                   <div style={{color:'red'}} className="input-feedback">{errors.hasAgreed}</div>

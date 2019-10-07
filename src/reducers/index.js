@@ -1,24 +1,24 @@
 import {combineReducers} from 'redux'
-import {stitchClient} from '../pages/const'
-import {RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
+// import {stitchClient} from '../pages/const'
+// import {RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
 
-const mongodb = stitchClient.getServiceClient(
-  RemoteMongoClient.factory,
-  "mongodb-atlas"
-);
-const db=mongodb.db('EventDash');
-const collection= db.collection('Utilisateur');
+// const mongodb = stitchClient.getServiceClient(
+//   RemoteMongoClient.factory,
+//   "mongodb-atlas"
+// );
+// const db=mongodb.db('EventDash');
+// const collection= db.collection('Utilisateur');
 
-function fetch(){
+// function fetch(){
         
-    collection.find().toArray()
-    .then(items => {
-    console.log(`Successfully found ${items.length} documents.`);
-    localStorage.setItem('DataTable',JSON.stringify(items));
-    return items;
-    })
-    .catch(err => console.error(`Failed to find documents: ${err}`));
-}
+//     collection.find().toArray()
+//     .then(items => {
+//     console.log(`Successfully found ${items.length} documents.`);
+//     localStorage.setItem('DataTable',JSON.stringify(items));
+//     return items;
+//     })
+//     .catch(err => console.error(`Failed to find documents: ${err}`));
+// }
 
 function TestLocal(){
     if (JSON.parse(localStorage.getItem('DataTable')) === null) {
@@ -29,6 +29,7 @@ function TestLocal(){
         return rows1;
     }
 }
+
 
 
 const AllUsersReducer=()=>{
