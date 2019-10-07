@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css');
 @import '../src/components/base.scss';
+
 .App {
   height: 100vh;
   display: flex;

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import AppAside from './AppAside'
-
 import {stitchClient} from './const';
-
 import {UserPasswordAuthProviderClient} from 'mongodb-stitch-browser-sdk';
+import Loader from 'react-loader-spinner'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+
 const emailPasswordClient = stitchClient.auth
   .getProviderClient(UserPasswordAuthProviderClient.factory);
   const url = window.location.search;
@@ -40,7 +41,17 @@ class EmailConfirmation extends Component {
 
 
             <h1 style={{fontSize:'40px',color:'#000',marginBottom:'40px'}}>Confirmation Email</h1>
-            <div style={{textAlign:'center',fontSize:'30px',color:'black',margin: '0 auto',width:'650px',marginTop:'200px'}}>vous serez redirigé vers la page de connexion en 3 secondes</div>
+            <div style={{textAlign:'center',fontSize:'30px',color:'black',margin: '0 auto',width:'650px',marginTop:'200px'}}>
+              <h1>Vous serez redirigé vers la page de connexion</h1>
+              <br/>
+              <Loader
+                      type="Puff"
+                      color="#00BFFF"
+                      height={80}
+                      width={80}
+                    />
+
+            </div>
 
             
           </div>

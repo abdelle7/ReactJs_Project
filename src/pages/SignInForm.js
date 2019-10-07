@@ -7,6 +7,8 @@ import {stitchClient} from './const'
 import {RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
 import {UserPasswordCredential} from 'mongodb-stitch-browser-sdk';
 import {DataBase} from './const';
+import Loader from 'react-loader-spinner'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 const mongodb = stitchClient.getServiceClient(
   RemoteMongoClient.factory,
@@ -30,6 +32,7 @@ class SignInForm extends Component {
             email: '',
             password: '',
             display:false,
+            isloading:false
         };
 
         this.handleChangeMe = this.handleChangeMe.bind(this);
@@ -49,8 +52,9 @@ class SignInForm extends Component {
   }
 
     handleSubmit(e) {
-
         e.preventDefault();
+        this.setState({isloading:true});
+        this.setState({display:false});
         const credential = new UserPasswordCredential(this.state.email,this.state.password)
         stitchClient.auth.loginWithCredential(credential).then(authedUser => {
           console.log(`successfully logged in with id: ${authedUser.id}`);
@@ -67,6 +71,8 @@ class SignInForm extends Component {
 .catch(err => {
   console.error(`login failed with error: ${err}+${this.state.email}`);
   this.setState({display:true});
+  this.setState({isloading:false});
+
 })
     }
 
@@ -77,6 +83,7 @@ class SignInForm extends Component {
             <div className="App__Form">
             <div className="FormCenter">
             <h1 style={{color:'#000',marginBottom:'40px'}}>CONNEXION</h1>
+            
             <LoginError display={this.state.display}/>
 
             <Formik
@@ -144,14 +151,26 @@ validationSchema={Yup.object().shape({
                 {errors.password && touched.password && (
               <div style={{color:'red'}} className="input-feedback">{errors.password}</div>
             )}
+            
               </div>
               <Link to="/MotDePassOublie" className="linkoub">Mot de pass oublié</Link>
 
 
-              <div className="FormField">
+              <div className="FormField d-flex">
                   <button style={{fontSize: '18px'}} className="FormField__Button mr-20">Se connecter</button>
-                   <br></br><span style={{fontSize:'17px',color:'black',marginTop:'20px',display:'flex'}}>Vous n'avez pas de compte:&nbsp;<Link to="/"  className="FormField__LinkINS">S'inscrire</Link></span>
+                  <span>             
+                      <Loader
+                      type="Puff"
+                      color="#00BFFF"
+                      // visible={this.state.isloading}
+                      height={60}
+                      width={60}
+                    />
+                  </span>
               </div>
+              <br></br>
+              <span style={{fontSize:'17px',color:'black',marginTop:'20px',display:'flex'}}>Vous n'avez pas de compte:&nbsp;<Link to="/"  className="FormField__LinkINS">S'inscrire</Link></span>
+ 
             </form>
   );
 }}

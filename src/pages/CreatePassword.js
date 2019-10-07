@@ -4,6 +4,9 @@ import {stitchClient} from './const';
 import {UserApiKeyCredential,RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
 import {UserPasswordAuthProviderClient} from 'mongodb-stitch-browser-sdk';
 import {DataBase,ADMIN} from './const';
+import Loader from 'react-loader-spinner'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+
 const nom=localStorage.getItem('nom');
 const email=localStorage.getItem('email');
 const societe = localStorage.getItem('societe');
@@ -74,7 +77,8 @@ class CreatePassword extends Component {
         this.state = {
             password: '',
             passwordconf:'',
-            display:'nothing'
+            display:'nothing',
+            isloading:false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -93,13 +97,15 @@ class CreatePassword extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-
+        this.setState({isloading:true});
+        this.setState({display: "nothing"});
         if (this.state.password===this.state.passwordconf){
           emailPasswordClient.registerWithEmail(email, this.state.password)
           .then(() => {
             Authetification(nom,email,societe,telephone);
             console.log("Successfully sent account confirmation email!"+email+nom+this.state.password);
             this.setState({display: "Succes"});
+            this.setState({isloading:false});
             // window.setTimeout(function() {
             //   window.location='/sign-in'
             //               }, 2000);
@@ -107,11 +113,13 @@ class CreatePassword extends Component {
           .catch(err => {
             if(err.message==='name already in use'){
               this.setState({display: "EmailExist"});
+              this.setState({isloading:false});
             }
             console.log("Error registering new user:", err.message);
           });
           }else{
             this.setState({display: "NotMatch"});
+            this.setState({isloading:false});
             console.log('password not matched');
           }
     }
@@ -139,8 +147,17 @@ class CreatePassword extends Component {
                 <input type="password" id="passwordconf" className="FormField__Input" placeholder="Entrez votre password" name="passwordconf" value={this.state.passwordconf} onChange={this.handleChange} />
               </div>
 
-              <div className="FormField">
+              <div className="FormField d-flex">
                   <button style={{fontSize: '18px'}} className="FormField__ButtonSinup mr-20">Définir mot de passe</button>
+                  <span>             
+                      <Loader
+                      type="Puff"
+                      color="#00BFFF"
+                      visible={this.state.isloading}
+                      height={60}
+                      width={60}
+                    />
+                  </span>
               </div>
             </form>
           </div>
