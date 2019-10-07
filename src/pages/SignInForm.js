@@ -162,7 +162,7 @@ validationSchema={Yup.object().shape({
                       <Loader
                       type="Puff"
                       color="#00BFFF"
-                      // visible={this.state.isloading}
+                      visible={this.state.isloading}
                       height={60}
                       width={60}
                     />
