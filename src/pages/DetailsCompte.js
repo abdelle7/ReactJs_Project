@@ -8,6 +8,8 @@ import {Segment,Sidebar} from "semantic-ui-react";
   import {stitchClient} from './const'
 import {RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
 import {DataBase} from './const';
+import Loader from 'react-loader-spinner'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 const mongodb = stitchClient.getServiceClient(
   RemoteMongoClient.factory,
@@ -61,7 +63,9 @@ class DetailsCompte extends Component {
       direction: "top",
       displaySucc:false,
       dimmed: false,
-      visible: false
+      visible: false,
+      isloading:true,
+      isloadingUpdate:false
   };
     // create a ref to store the textInput DOM element
     this.refDeno = React.createRef();
@@ -83,6 +87,7 @@ class DetailsCompte extends Component {
   display() {
     collection.findOne({ email: email }).then(_user => {
         console.log(`Deno: ${_user.Denomination}`);
+        this.setState({isloading:false});
         if(_user.Denomination!==undefined){
           localStorage.setItem('Deno',_user.Denomination);
           localStorage.setItem('contact',_user.Contact);
@@ -135,10 +140,11 @@ class DetailsCompte extends Component {
     
     handleSubmit = (e) =>  {
       var animation='push';
+      this.setState({isloadingUpdate:true});
       this.setState(prevState => ({ animation, visible: !prevState.visible }));
       console.log('this',this);
       e.preventDefault();
-console.log('submit');
+      console.log('submit');
       const update = {
         "$set": {
           "Denomination":this.state.denomination ,
@@ -150,10 +156,13 @@ console.log('submit');
 
       collection.updateOne(query, update, options)
       .then(
-        this.setState({displaySucc:true})
+        this.setState({isloadingUpdate:false}),
+        this.setState({displaySucc:true}),
+        
+
       )
-      .catch(err => console.error(`Failed to add review: ${err}`))
-        console.log('Test:',this.state.contact);
+      .catch(err => console.error(`Failed to add review: ${err}`),this.setState({isloadingUpdate:false})
+      )
 
     }
 
@@ -188,7 +197,9 @@ console.log('submit');
                     animation='push'
                     direction='top'
                     visible={visible}>
+                    
                     <h1 style={{color: 'black', margin: '10px 0 0 6px '}}>Detail Du Compte</h1>
+                    
                   <span className='d-flex justify-content-end'>
                       <Button   variant="outlined" onClick={this.handleAnimationChange('push')}  >
                       Annuler
@@ -201,8 +212,17 @@ console.log('submit');
               
                   </Sidebar>
                         
-          <div className='d-flex justify-content-between'>
+          <div className='d-flex'>
                     <h1 style={{color: 'black', margin: '20px 0 0 20px '}}>Detail Du Compte</h1>
+                    <span className='pt-4 pl-2'>             
+                      <Loader
+                      type="Puff"
+                      color="#00BFFF"
+                      visible={this.state.isloading}
+                      height={40}
+                      width={40}
+                    />
+                  </span>
                 </div>
 
         </Sidebar.Pushable>
@@ -212,6 +232,14 @@ console.log('submit');
                 <LoginError displaySucc={this.state.displaySucc}/>
                     <span className='FormCN'>
                     <MDBContainer className='MDBContainer' >
+                      <Loader
+                      type="Puff"
+                      color="#00BFFF"
+                      visible={this.state.isloadingUpdate}
+                      height={40}
+                      width={40}
+                    />
+                    
       <MDBRow className='rowCont '>
         <MDBCol  className=' pt-3 d-flex align-items-center'><label className='labelCN'>Dénomination</label>
         </MDBCol>
