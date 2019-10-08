@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {  makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,48 +9,48 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
-import {connect} from 'react-redux'
-import {DataBase} from '../pages/const';
-import {StitchAuthInfo} from '../pages/const';
+import { connect } from 'react-redux'
+import { DataBase } from '../pages/const';
+import { StitchAuthInfo } from '../pages/const';
 
 
-import {stitchClient} from '../pages/const'
-import {RemoteMongoClient} from 'mongodb-stitch-browser-sdk';
+import { stitchClient } from '../pages/const'
+import { RemoteMongoClient } from 'mongodb-stitch-browser-sdk';
 
 
 const mongodb = stitchClient.getServiceClient(
   RemoteMongoClient.factory,
   "mongodb-atlas"
 );
-const db=mongodb.db(DataBase);
-const collection= db.collection('Utilisateur');
+const db = mongodb.db(DataBase);
+const collection = db.collection('Utilisateur');
 
 
 
 
-const Session=localStorage.getItem(StitchAuthInfo);
-        if (Session!==null) {
-          collection.find().toArray()
-          .then(items => {
-            console.log(`Successfully found ${items.length} documents.`);
-            localStorage.setItem('DataTable',JSON.stringify(items));
-            return items;
-          })
-          .catch(err => console.error(`Failed to find documents: ${err}`));
-        }
-
-
-
-function TestLocal(){
-  if (JSON.parse(localStorage.getItem('DataTable')) === null) {
-    const rows1=[];
-    return rows1
- }else{
-    const rows1=JSON.parse(localStorage.getItem('DataTable'));
-    return rows1;
- }
+const Session = localStorage.getItem(StitchAuthInfo);
+if (Session !== null) {
+  collection.find().toArray()
+    .then(items => {
+      console.log(`Successfully found ${items.length} documents.`);
+      localStorage.setItem('DataTable', JSON.stringify(items));
+      return items;
+    })
+    .catch(err => console.error(`Failed to find documents: ${err}`));
 }
-  const rows=Array.from(TestLocal());
+
+
+
+function TestLocal() {
+  if (JSON.parse(localStorage.getItem('DataTable')) === null) {
+    const rows1 = [];
+    return rows1
+  } else {
+    const rows1 = JSON.parse(localStorage.getItem('DataTable'));
+    return rows1;
+  }
+}
+const rows = Array.from(TestLocal());
 
 
 function desc(a, b, orderBy) {
@@ -256,7 +256,7 @@ function EnhancedTable(props) {
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
-                        
+
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         {row._id}
@@ -276,7 +276,7 @@ function EnhancedTable(props) {
           </Table>
         </div>
         <TablePagination
-          rowsPerPageOptions={[5,8, 10]}
+          rowsPerPageOptions={[5, 8, 10]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
@@ -294,7 +294,7 @@ function EnhancedTable(props) {
     </div>
   );
 }
-const mapStatToPropd =(state)=>{
-  return {AllUsers: state.AllUsers};
+const mapStatToPropd = (state) => {
+  return { AllUsers: state.AllUsers };
 };
 export default connect(mapStatToPropd)(EnhancedTable);

@@ -7,7 +7,7 @@ nav.responsive-toolbar {
     top: 0;
     left: 0;
 
-    & ~ * {
+    &~* {
         padding-top: 60px;
     }
 

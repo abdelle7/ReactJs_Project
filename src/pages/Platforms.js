@@ -1,25 +1,25 @@
 import React, { Component } from 'react'
 
-const email=localStorage.getItem('email');
+const email = localStorage.getItem('email');
 
 class Platform extends Component {
 
-    constructor(){
+    constructor() {
         super();
 
-        if(email===null){
-        window.location = "/";
+        if (email === null) {
+            window.location = "/";
         }
     }
-    render () {
+    render() {
         return (
             <div className="bgcolor w-100 d-inline-flex">
-  
-                <div className="w-100" style={{height:'fit-content' ,marginLeft:'300px'}}>
-          <div className='d-flex justify-content-between'>
-                    <h1 style={{color: 'black', margin: '20px 0 0 20px '}}>Platforms</h1>
-                </div>
-                
+
+                <div className="w-100" style={{ height: 'fit-content', marginLeft: '300px' }}>
+                    <div className='d-flex justify-content-between'>
+                        <h1 style={{ color: 'black', margin: '20px 0 0 20px ' }}>Platforms</h1>
+                    </div>
+
                 </div>
             </div>
         )

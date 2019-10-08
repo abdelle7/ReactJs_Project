@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 
 
 class AppAside extends Component {
-    render () {
+    render() {
         return (
             <div className="App__Aside">
                 <img src={'/macdesktop.jpg'} alt='' />
-             </div>
+            </div>
         )
     }
 }

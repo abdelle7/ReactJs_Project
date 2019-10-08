@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
 
-const email=localStorage.getItem('email');
+const email = localStorage.getItem('email');
 
 
 class Paramters extends Component {
-    constructor(){
+    constructor() {
         super();
 
-        if(email===null){
-        window.location = "/";
+        if (email === null) {
+            window.location = "/";
         }
     }
-    render () {
+    render() {
         return (
             <div className="w-100 d-inline-flex">
 
-            <div style={{color:'black'}}>Parametres</div>
-        </div>
+                <div style={{ color: 'black' }}>Parametres</div>
+            </div>
         )
     }
 }

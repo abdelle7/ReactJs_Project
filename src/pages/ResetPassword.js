@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 import AppAside from './AppAside'
-import {stitchClient} from './const';
+import Loader from 'react-loader-spinner'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { stitchClient } from './const';
+import { UserPasswordAuthProviderClient } from 'mongodb-stitch-browser-sdk';
 
-import {UserPasswordAuthProviderClient} from 'mongodb-stitch-browser-sdk';
+const ResetInfo = (props) => {
+  if (props.display) {
+    return (<div style={{ color: 'red', fontWeight: 'bold', fontSize: '15px' }} id="results" className="search-results">
+      Mot de passe et confirmation pas pareil
+    </div>)
+  } else if (props.sent) {
+    return (<div style={{ color: 'green', fontWeight: 'bold', fontSize: '15px' }} id="results" className="search-results">
+      Mot De Passe réinitialisater avec succès
+  </div>)
+  } else return null
+};
 const url = window.location.search;
 const params = new URLSearchParams(url);
 
@@ -11,72 +24,87 @@ const tokenId = params.get('tokenId');
 
 const emailPasswordClient = stitchClient.auth
   .getProviderClient(UserPasswordAuthProviderClient.factory);
-  // const userForm={
-  //   "aud": "eventdash-rezoi",
-  //   "exp": 1516239022,
-  //   "sub": "24601",
-  //   "_user": {
-  //     "nom_prenom": nom,
-  //     "telephon": telephone,
-  //     "email": email,
-  //     "societe": societe,
-  //   }
-  // }
+// const userForm={
+//   "aud": "eventdash-rezoi",
+//   "exp": 1516239022,
+//   "sub": "24601",
+//   "_user": {
+//     "nom_prenom": nom,
+//     "telephon": telephone,
+//     "email": email,
+//     "societe": societe,
+//   }
+// }
 
 class ResetPassword extends Component {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this.state = {
-            password: '',
-            passwordconf:''
-        };
+    this.state = {
+      password: '',
+      passwordconf: '',
+      isloading: false,
+      display: false,
+      sent: false,
+    };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-    handleChange(e) {
-        let target = e.target;
-        let value = target.type === 'checkbox' ? target.checked : target.value;
-        let name = target.name;
+  handleChange(e) {
+    let target = e.target;
+    let value = target.type === 'checkbox' ? target.checked : target.value;
+    let name = target.name;
 
-        this.setState({
-          [name]: value
-        });
-    }
+    this.setState({
+      [name]: value
+    });
+  }
 
-    handleSubmit(e) {
-        e.preventDefault();
+  handleSubmit(e) {
+    e.preventDefault();
+    this.setState({ isloading: true });
+    this.setState({ display: false });
+    this.setState({ sent: false });
 
-        if (this.state.password===this.state.passwordconf){
-          emailPasswordClient.resetPassword(token, tokenId, this.state.password)
-          .then(() => {
-            console.log("Successfully reset password!");
-            window.location = "/sign-in";
+    if (this.state.password === this.state.passwordconf) {
+      emailPasswordClient.resetPassword(token, tokenId, this.state.password)
+        .then(() => {
+          this.setState({ isloading: false });
+          this.setState({ sent: true });
+          console.log("Successfully reset password!");
+          window.setTimeout(function () {
+            window.location = '/sign-in'
+          }, 2000);
         })
-          .catch(err => {
-            console.log("Error resetting password:", err);
-          });
-          }else{
-            console.log('password not matched');
-          }
+        .catch(err => {
+          this.setState({ isloading: false });
+          // this.setState({display:true});
+          console.log("Error resetting password:", err);
+        });
+    } else {
+      this.setState({ isloading: false });
+      this.setState({ display: true });
+      console.log('password not matched');
     }
+  }
 
-    render() {
-        return (
-          <div className="w-100 d-inline-flex">
-                      <AppAside/>
+  render() {
+    return (
+      <div className="w-100 d-inline-flex">
+        <AppAside />
 
-          <div className="App__Form">
+        <div className="App__Form">
 
-        <div className="FormCenter">
+          <div className="FormCenter">
 
-            <h1 style={{color:'#000',marginBottom:'40px'}}>Créé un mot de passe</h1>
+            <h1 style={{ color: '#000', marginBottom: '40px' }}>Créé un mot de passe</h1>
+            <ResetInfo sent={this.state.sent} display={this.state.display} />
 
             <form onSubmit={this.handleSubmit} className="FormFields">
 
-           <div className="FormField">
+              <div className="FormField">
                 <label className="FormField__Label" htmlFor="password">Mot de passe</label>
                 <input type="password" id="password" className="FormField__Input" placeholder="Entrez votre password" name="password" value={this.state.password} onChange={this.handleChange} />
               </div>
@@ -85,15 +113,24 @@ class ResetPassword extends Component {
                 <input type="password" id="passwordconf" className="FormField__Input" placeholder="Entrez votre password" name="passwordconf" value={this.state.passwordconf} onChange={this.handleChange} />
               </div>
 
-              <div className="FormField">
-                  <button style={{fontSize: '18px'}} className="FormField__ButtonSinup mr-20">Définir mot de passe</button>
+              <div className="FormField d-flex">
+                <button style={{ fontSize: '18px' }} className="FormField__ButtonSinup mr-20">Définir mot de passe</button>
+                <span>
+                  <Loader
+                    type="Puff"
+                    color="#00BFFF"
+                    visible={this.state.isloading}
+                    height={60}
+                    width={60}
+                  />
+                </span>
               </div>
             </form>
           </div>
-          </div>
-          </div>
-        );
-    }
+        </div>
+      </div>
+    );
+  }
 }
 
 export default ResetPassword;
