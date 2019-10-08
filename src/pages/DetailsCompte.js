@@ -157,8 +157,8 @@ class DetailsCompte extends Component {
       .then(
         this.setState({isloadingUpdate:false}),
         this.setState({displaySucc:true}),
-        
 
+        
       )
       .catch(err => console.error(`Failed to add review: ${err}`),this.setState({isloadingUpdate:false})
       )
