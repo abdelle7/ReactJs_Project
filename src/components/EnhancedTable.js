@@ -11,6 +11,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
 import {connect} from 'react-redux'
 import {DataBase} from '../pages/const';
+import {StitchAuthInfo} from '../pages/const';
 
 
 import {stitchClient} from '../pages/const'
@@ -27,14 +28,18 @@ const collection= db.collection('Utilisateur');
 
 
 
+const Session=localStorage.getItem(StitchAuthInfo);
+        if (Session!==null) {
+          collection.find().toArray()
+          .then(items => {
+            console.log(`Successfully found ${items.length} documents.`);
+            localStorage.setItem('DataTable',JSON.stringify(items));
+            return items;
+          })
+          .catch(err => console.error(`Failed to find documents: ${err}`));
+        }
 
-collection.find().toArray()
-.then(items => {
-  console.log(`Successfully found ${items.length} documents.`);
-  localStorage.setItem('DataTable',JSON.stringify(items));
-  return items;
-})
-.catch(err => console.error(`(This is Not Error) Failed to find documents: ${err}`));
+
 
 function TestLocal(){
   if (JSON.parse(localStorage.getItem('DataTable')) === null) {

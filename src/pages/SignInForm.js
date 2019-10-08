@@ -41,7 +41,6 @@ class SignInForm extends Component {
     
 
     handleChangeMe(e) {
-      console.log(`successfully logged in with i`);
       let target = e.target;
       let value = target.type === 'checkbox' ? target.checked : target.value;
       let name = target.name;
@@ -60,7 +59,6 @@ class SignInForm extends Component {
           console.log(`successfully logged in with id: ${authedUser.id}`);
           localStorage.setItem('email',this.state.email);
           collection.findOne({ email: this.state.email }).then(function(_user){
-              console.log(`email: ${_user.email}`);
               localStorage.setItem('telephone',_user.Telephone);
               localStorage.setItem('societe',_user.Societe);
               localStorage.setItem('nom',_user.nom_prenom);

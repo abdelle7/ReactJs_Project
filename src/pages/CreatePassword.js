@@ -43,7 +43,6 @@ const emailPasswordClient = stitchClient.auth
     stitchClient.auth.loginWithCredential(credential).then(authedUser => {
 
       collection.insertOne(user).then(result => {
-          console.log(result);
           localStorage.clear();
           window.location = "/sign-in";
         }).catch(err => console.error(`Failed to insert item: ${err}`));
@@ -103,7 +102,7 @@ class CreatePassword extends Component {
           emailPasswordClient.registerWithEmail(email, this.state.password)
           .then(() => {
             Authetification(nom,email,societe,telephone);
-            console.log("Successfully sent account confirmation email!"+email+nom+this.state.password);
+            console.log("Successfully sent account confirmation email!"+email);
             this.setState({display: "Succes"});
             this.setState({isloading:false});
             // window.setTimeout(function() {

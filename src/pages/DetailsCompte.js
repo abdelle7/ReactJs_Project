@@ -86,7 +86,6 @@ class DetailsCompte extends Component {
 
   display() {
     collection.findOne({ email: email }).then(_user => {
-        console.log(`Deno: ${_user.Denomination}`);
         this.setState({isloading:false});
         if(_user.Denomination!==undefined){
           localStorage.setItem('Deno',_user.Denomination);
@@ -142,9 +141,7 @@ class DetailsCompte extends Component {
       var animation='push';
       this.setState({isloadingUpdate:true});
       this.setState(prevState => ({ animation, visible: !prevState.visible }));
-      console.log('this',this);
       e.preventDefault();
-      console.log('submit');
       const update = {
         "$set": {
           "Denomination":this.state.denomination ,
