@@ -10,7 +10,7 @@ class Dashboard extends Component {
 
     render () {
         return (
-            <div className="bgcolor w-100 d-inline-flex">
+            <div className="bgcolor w-100 d-inline-flex " style={{height:'fit-content' ,marginLeft:'300px'}}>
 
                 <div className="w-100">
           <div className='d-flex justify-content-between'>

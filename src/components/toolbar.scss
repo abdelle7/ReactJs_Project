@@ -2,6 +2,10 @@ nav.responsive-toolbar {
     background: #333333;
     height: 100%;
     box-shadow: 2px 0px 2px #ccc;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
 
     & ~ * {
         padding-top: 60px;
@@ -51,45 +55,6 @@ nav.responsive-toolbar {
             margin-right: 50px;
             font-size: 20px;
             padding-left: 40px;
-        }
-    }
-}
-
-@media screen and (max-width: 759px) {
-    nav.responsive-toolbar {
-        width: 60px;
-        ul {
-            height: 100%;
-            width: 100%;
-            left: -240px;
-            position: fixed;
-            top: 60px;
-            flex-direction: column;
-            transition: 300ms ease all;
-
-            &.active {
-                left: 0px;
-            }
-
-            figure {
-                margin-inline-start: 2px;
-                position: fixed;
-                left: 9px;
-                top: 10px;
-            }
-
-            li {
-                width: 100%;
-                padding-left: 0;
-                padding-right: 0;
-            }
-
-            a {
-                flex-direction: row;
-                justify-content: space-between;
-                margin-left: 20px;
-                margin-right: 16px;
-            }
         }
     }
 }

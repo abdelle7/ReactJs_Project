@@ -36,10 +36,10 @@ function random(min, max) {
   }
   
   const mainChart = {
-    labels: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+    labels: ['Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di','Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di','Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di','Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di'],
     datasets: [
       {
-        label: 'My First dataset',
+        label: 'Mes Premiers données',
         backgroundColor: 'rgba(99, 194, 222,0.1)',
         borderColor: 'rgba(99, 194, 222)',
         pointHoverBackgroundColor: '#fff',
@@ -47,7 +47,7 @@ function random(min, max) {
         data: data1,
       },
       {
-        label: 'My Second dataset',
+        label: 'Mes deuxième données',
         backgroundColor: 'transparent',
         borderColor: 'green',
         pointHoverBackgroundColor: '#fff',
@@ -55,7 +55,7 @@ function random(min, max) {
         data: data2,
       },
       {
-        label: 'My Third dataset',
+        label: 'Mes troisième données',
         backgroundColor: 'transparent',
         borderColor: 'red',
         pointHoverBackgroundColor: '#fff',
@@ -148,16 +148,16 @@ class MainChart extends React.Component {
                     <CardBody>
                     <Row>
                         <Col sm="5">
-                        <CardTitle className="mb-0">Traffic</CardTitle>
+                        <CardTitle className="mb-0" style={{color:'black'}}>Traffic</CardTitle>
                         <div className="small text-muted">Octobre 2019</div>
                         </Col>
                         <Col sm="7" className="d-none d-sm-inline-block">
-                        <Button color="primary" className="float-right"><i className="icon-cloud-download"></i></Button>
+                        {/* <Button color="primary" className="float-right"><i className="icon-cloud-download"></i></Button> */}
                         <ButtonToolbar className="float-right" aria-label="Toolbar with button groups">
                             <ButtonGroup className="mr-3" aria-label="First group">
-                            <Button color="outline-secondary" onClick={() => this.onRadioBtnClick(1)} active={this.state.radioSelected === 1}>Day</Button>
-                            <Button color="outline-secondary" onClick={() => this.onRadioBtnClick(2)} active={this.state.radioSelected === 2}>Month</Button>
-                            <Button color="outline-secondary" onClick={() => this.onRadioBtnClick(3)} active={this.state.radioSelected === 3}>Year</Button>
+                            <Button color="outline-secondary" onClick={() => this.onRadioBtnClick(1)} active={this.state.radioSelected === 1}>Jour</Button>
+                            <Button color="outline-secondary" onClick={() => this.onRadioBtnClick(2)} active={this.state.radioSelected === 2}>Mois</Button>
+                            <Button color="outline-secondary" onClick={() => this.onRadioBtnClick(3)} active={this.state.radioSelected === 3}>Année</Button>
                             </ButtonGroup>
                         </ButtonToolbar>
                         </Col>
@@ -169,28 +169,28 @@ class MainChart extends React.Component {
                     <CardFooter>
                     <Row className="text-center">
                         <Col sm={12} md className="mb-sm-2 mb-0">
-                        <div className="text-muted">Visits</div>
-                        <strong>29.703 Users (40%)</strong>
+                        <div className="text-muted">Visites</div>
+                        <strong style={{color:'black'}}>29.703 utilisateurs (40%)</strong>
                         <Progress className="progress-xs mt-2" color="success" value="40" />
                         </Col>
                         <Col sm={12} md className="mb-sm-2 mb-0 d-md-down-none">
                         <div className="text-muted">Unique</div>
-                        <strong>24.093 Users (20%)</strong>
+                        <strong style={{color:'black'}}>24.093 utilisateurs (20%)</strong>
                         <Progress className="progress-xs mt-2" color="info" value="20" />
                         </Col>
                         <Col sm={12} md className="mb-sm-2 mb-0">
-                        <div className="text-muted">Pageviews</div>
-                        <strong>78.706 Views (60%)</strong>
+                        <div className="text-muted">Pages vues</div>
+                        <strong style={{color:'black'}}>78.706 vues (60%)</strong>
                         <Progress className="progress-xs mt-2" color="warning" value="60" />
                         </Col>
                         <Col sm={12} md className="mb-sm-2 mb-0">
-                        <div className="text-muted">New Users</div>
-                        <strong>22.123 Users (80%)</strong>
+                        <div className="text-muted">Nouveaux utilisateurs</div>
+                        <strong style={{color:'black'}}>22.123 utilisateurs (80%)</strong>
                         <Progress className="progress-xs mt-2" color="danger" value="80" />
                         </Col>
                         <Col sm={12} md className="mb-sm-2 mb-0 d-md-down-none">
-                        <div className="text-muted">Bounce Rate</div>
-                        <strong>Average Rate (40.15%)</strong>
+                        <div className="text-muted">Taux de rebond</div>
+                        <strong style={{color:'black'}}>Taux moyen (40.15%)</strong>
                         <Progress className="progress-xs mt-2" color="primary" value="40" />
                         </Col>
                     </Row>

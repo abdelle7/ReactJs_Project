@@ -18,10 +18,10 @@ const brandPrimary = getStyle('--primary')
 
 // Card Chart 1
 const cardChartData1 = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet'],
   datasets: [
     {
-      label: 'My First dataset',
+      label: 'Mes données',
       backgroundColor: brandPrimary,
       borderColor: 'rgba(255,255,255,.55)',
       data: [65, 59, 84, 84, 51, 55, 40],
@@ -122,7 +122,7 @@ class CardChart extends React.Component {
                     </Dropdown>
                   </ButtonGroup>
                   <div className="text-value">9.823</div>
-                  <div>Members online</div>
+                  <div>Membres en ligne</div>
                 </CardBody>
                 <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
                   <Line data={cardChartData1} options={cardChartOpts1} height={70} />

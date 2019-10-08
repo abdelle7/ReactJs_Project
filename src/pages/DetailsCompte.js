@@ -65,7 +65,8 @@ class DetailsCompte extends Component {
       dimmed: false,
       visible: false,
       isloading:true,
-      isloadingUpdate:false
+      isloadingUpdate:false,
+      disabled:true
   };
     // create a ref to store the textInput DOM element
     this.refDeno = React.createRef();
@@ -87,6 +88,7 @@ class DetailsCompte extends Component {
   display() {
     collection.findOne({ email: email }).then(_user => {
         this.setState({isloading:false});
+        this.setState({disabled:false});
         if(_user.Denomination!==undefined){
           localStorage.setItem('Deno',_user.Denomination);
           localStorage.setItem('contact',_user.Contact);
@@ -185,7 +187,7 @@ class DetailsCompte extends Component {
         return (
             <div className=" bgcolor w-100 d-inline-flex">
 
-                <div className="w-100">
+                <div className="w-100" style={{height:'fit-content' ,marginLeft:'300px'}}>
                 <form onSubmit={this.handleSubmit} >
                 <div>
                 <Sidebar.Pushable style={{height:'200px'}}>
@@ -225,7 +227,7 @@ class DetailsCompte extends Component {
         </Sidebar.Pushable>
                 </div>
                 
-                <div className='detailsContainer'>
+                <div className='detailsContainer' style={{minWidth:'600px'}}>
                 <LoginError displaySucc={this.state.displaySucc}/>
                     <span className='FormCN'>
                     <MDBContainer className='MDBContainer' >
@@ -251,6 +253,7 @@ class DetailsCompte extends Component {
                             value={this.state.denomination}
                             margin="dense"
                             variant="outlined"
+                            disabled={this.state.disabled}
                             onChange={this.handleChange}
                             inputprops={{ 'aria-label': 'bare' }}
                         />
@@ -273,6 +276,7 @@ class DetailsCompte extends Component {
                             value={this.state.contact}
                             margin="dense"
                             variant="outlined"
+                            disabled={this.state.disabled}
                             onChange={this.handleChange}
                             inputprops={{ 'aria-label': 'bare' }}
                         />
@@ -295,6 +299,7 @@ class DetailsCompte extends Component {
                             onFocus={this.inputFocusNav}
                             margin="dense"
                             variant="outlined"
+                            disabled={this.state.disabled}
                             onChange={this.handleChange}
                             inputprops={{ 'aria-label': 'bare' }}
                         />
@@ -318,6 +323,7 @@ class DetailsCompte extends Component {
                             margin="dense"
                             onChange={this.handleChange}
                             variant="outlined"
+                            disabled={this.state.disabled}
                             inputprops={{ 'aria-label': 'bare' }}
                         />
                         </span></MDBCol>

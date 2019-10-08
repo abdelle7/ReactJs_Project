@@ -219,6 +219,7 @@ button:focus{
 }
 .FormCN{
   display: inline-block;
+  min-width: 600px;
 }
 .SpanLibel{
 
