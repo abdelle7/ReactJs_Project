@@ -196,7 +196,7 @@ class CreatePassword extends Component {
 
               <div className="FormField">
                 <label className="FormField__Label" htmlFor="password">Mot de passe</label>
-                <input type="password" id="password" className={`FormField__Input ${errors.email && touched.email ? 'text-input error' : 'text-input'}`} placeholder="Entrez votre password" name="password" value={values.password} onBlur={handleBlur} onChange={handleChange} />
+                <input type="password" id="password" className={`FormField__Input ${errors.password && touched.password ? 'text-input error' : 'text-input'}`} placeholder="Entrez votre password" name="password" value={values.password} onBlur={handleBlur} onChange={handleChange} />
                 
                 {errors.password && touched.password && (
                         <div style={{ color: 'red' }} className="input-feedback">{errors.password}</div>
@@ -204,7 +204,7 @@ class CreatePassword extends Component {
               </div>
               <div className="FormField">
                 <label className="FormField__Label" htmlFor="passwordconf">Confirmer le Mot de passe</label>
-                <input type="password" id="passwordconf" className={`FormField__Input ${errors.email && touched.email ? 'text-input error' : 'text-input'}`} placeholder="Confirmez votre password" name="passwordconf" value={values.passwordconf} onBlur={handleBlur} onChange={handleChange} />
+                <input type="password" id="passwordconf" className={`FormField__Input ${errors.passwordconf && touched.passwordconf ? 'text-input error' : 'text-input'}`} placeholder="Confirmez votre password" name="passwordconf" value={values.passwordconf} onBlur={handleBlur} onChange={handleChange} />
                 
                 {errors.passwordconf && touched.passwordconf && (
                         <div style={{ color: 'red' }} className="input-feedback">{errors.passwordconf}</div>

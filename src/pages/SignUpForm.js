@@ -6,7 +6,7 @@ import AppAside from './AppAside';
 
 const SignUpError = (props) => {
   if (props.display) {
-    return (<div style={{ color: 'red' }} id="results" className="search-results">
+    return (<div style={{ color: 'red', fontWeight: 'bold', fontSize: '15px' }} id="results" className="search-results">
       Complète les Champs Obligatoires
     </div>)
   } else return null

@@ -21,6 +21,10 @@ const LoginError = (props) => {
     return (<div style={{ color: 'red', fontWeight: 'bold', fontSize: '15px' }} id="results" className="search-results">
       Email ou Mot de passe invalide
     </div>)
+  }else if(props.completeForm){
+    return (<div style={{ color: 'red', fontWeight: 'bold', fontSize: '15px' }} id="results" className="search-results">
+      Complète les Champs Obligatoires
+    </div>)
   } else return null
 };
 
@@ -32,7 +36,8 @@ class SignInForm extends Component {
       email: '',
       password: '',
       display: false,
-      isloading: false
+      isloading: false,
+      completeForm:false,
     };
 
     this.handleChangeMe = this.handleChangeMe.bind(this);
@@ -82,12 +87,15 @@ class SignInForm extends Component {
           <div className="FormCenter">
             <h1 style={{ color: '#000', marginBottom: '40px' }}>CONNEXION</h1>
 
-            <LoginError display={this.state.display} />
+            <LoginError completeForm={this.state.completeForm} display={this.state.display} />
 
             <Formik
               onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
-                  //alert(JSON.stringify(values));
+                  if (values.email === ''||values.password==='') {
+                    this.setState({ completeForm: true });
+                  }
+                    console.log('error');
                   this.setState({ isloading: true });
                   this.setState({ display: false });
                   const credential = new UserPasswordCredential(values.email, values.password)
