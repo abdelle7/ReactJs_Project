@@ -87,7 +87,27 @@ class SignInForm extends Component {
             <Formik
               onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
-                  alert(JSON.stringify(values, null, 2));
+                  //alert(JSON.stringify(values));
+                  this.setState({ isloading: true });
+                  this.setState({ display: false });
+                  const credential = new UserPasswordCredential(values.email, values.password)
+                  stitchClient.auth.loginWithCredential(credential).then(authedUser => {
+                    console.log(`successfully logged in with id: ${authedUser.id}`);
+                    localStorage.setItem('email', values.email);
+                    collection.findOne({ email: values.email }).then(function (_user) {
+                      localStorage.setItem('telephone', _user.Telephone);
+                      localStorage.setItem('societe', _user.Societe);
+                      localStorage.setItem('nom', _user.nom_prenom);
+                      localStorage.setItem('email', _user.email);
+                      window.location = "/dashboard";
+                    });
+                  })
+                    .catch(err => {
+                      console.error(`login failed with error: ${err}+${values.email}`);
+                      this.setState({ display: true });
+                      this.setState({ isloading: false });
+
+                    })
                   setSubmitting(false);
                 }, 500);
               }}
@@ -98,34 +118,26 @@ class SignInForm extends Component {
                 password: Yup
                   .string()
                   .required("S'il vous plait entrez votre mot de passe")
-                  .min(6, 'Le mot de passe est trop court - au moins 6 caractères.'),
-                // .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+                  .min(6, 'Le mot de passe est trop court - au moins 6 caractères.')
+                  .matches(/[a-zA-Z]/, 'Le mot de passe doit contenir des lettres.'),
               })}
             >
               {props => {
                 const {
                   touched,
+                  values,
                   errors,
                   handleChange,
                   handleBlur,
+                  handleSubmit,
 
                 } = props;
                 return (
-                  <form onSubmit={this.handleSubmit} className="FormFields">
+                  <form onSubmit={handleSubmit} className="FormFields">
 
                     <div className="FormField">
                       <label className="FormField__Label" htmlFor="email">E-mail</label>
-                      <input type="email" id="email" className={`FormField__Input ${errors.email && touched.email ? 'text-input error' : 'text-input'}`} placeholder="Entrez votre email" name="email" value={this.state.email} onBlur={handleBlur} onChange={e => {
-                        // call the built-in handleBur
-                        handleChange(e)
-                        // and do something about e
-                        let target = e.target;
-                        let value = target.type === 'checkbox' ? target.checked : target.value;
-                        let name = target.name;
-                        this.setState({
-                          [name]: value
-                        });
-                      }}
+                      <input type="email" id="email" className={`FormField__Input ${errors.email && touched.email ? 'text-input error' : 'text-input'}`} placeholder="Entrez votre email" name="email" value={values.email} onBlur={handleBlur} onChange={handleChange}
                       />
 
                       {errors.email && touched.email && (
@@ -135,17 +147,7 @@ class SignInForm extends Component {
 
                     <div className="FormField">
                       <label className="FormField__Label" htmlFor="password">Mot De Passe</label>
-                      <input type="password" id="password" className={`FormField__Input ${errors.password && touched.password ? 'text-input error' : 'text-input'}`} placeholder="Entrez votre Mot de passe" name="password" value={this.state.password} onBlur={handleBlur} onChange={e => {
-                        // call the built-in handleBur
-                        handleChange(e)
-                        // and do something about e
-                        let target = e.target;
-                        let value = target.type === 'checkbox' ? target.checked : target.value;
-                        let name = target.name;
-                        this.setState({
-                          [name]: value
-                        });
-                      }}
+                      <input type="password" id="password" className={`FormField__Input ${errors.password && touched.password ? 'text-input error' : 'text-input'}`} placeholder="Entrez votre Mot de passe" name="password" value={values.password} onBlur={handleBlur} onChange={handleChange}
                       />
 
                       {errors.password && touched.password && (
@@ -157,7 +159,7 @@ class SignInForm extends Component {
 
 
                     <div className="FormField d-flex">
-                      <button style={{ fontSize: '18px' }} className="FormField__Button mr-20">Se connecter</button>
+                      <button type="submit" style={{ fontSize: '18px' }} className="FormField__Button mr-20">Se connecter</button>
                       <span>
                         <Loader
                           type="Puff"

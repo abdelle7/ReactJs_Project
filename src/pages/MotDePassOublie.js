@@ -103,10 +103,7 @@ class MotDePassOublie extends Component {
               validationSchema={Yup.object().shape({
                 email: Yup.string()
                   .email("L'Email doit être valide")
-                  .required('Champs obligatoires'),
-                password: Yup
-                  .string()
-                  .required("S'il vous plait entrez votre mot de passe"),
+                  .required('Champs obligatoires')
               })}
             >
               {props => {
