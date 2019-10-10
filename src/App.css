@@ -1,7 +1,7 @@
-@import url('https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css');
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-@import url('https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css');
-@import '../src/components/base.scss';
+@import url("https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css");
+@import "../src/components/base.scss";
 
 .App {
   height: 100vh;
@@ -33,11 +33,11 @@
 }
 
 .PageSwitcher__Item {
-  background-color: #4C5D72;
-  color: #9DA6B1;
+  background-color: #4c5d72;
+  color: #9da6b1;
   padding: 10px 25px;
   cursor: pointer;
-  font-size: .9em;
+  font-size: 0.9em;
   border: none;
   outline: none;
   display: inline-block;
@@ -45,7 +45,7 @@
 }
 
 .PageSwitcher__Item--Active {
-  background-color: #5ED0C0;
+  background-color: #5ed0c0;
   color: white;
 }
 
@@ -57,7 +57,7 @@
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
 }
-.FormFields{
+.FormFields {
   margin-left: 50px;
 }
 .FormCenter {
@@ -65,13 +65,13 @@
 }
 
 .FormTitle {
-  color: #707C8B;
+  color: #707c8b;
   font-weight: 300;
   margin-bottom: 50px;
 }
 
 .FormTitle__Link {
-  color: #707C8B;
+  color: #707c8b;
   text-decoration: none;
   display: inline-block;
   font-size: 1.7em;
@@ -113,59 +113,60 @@
 }
 
 .FormField__Input::placeholder {
-  color: #616E7F;
+  color: #616e7f;
 }
 
 .FormField__Button {
-  background-image: linear-gradient( #0CA045 10%,#0A8137 60%, #085E27 100% );
+  background-image: linear-gradient(#0ca045 10%, #0a8137 60%, #085e27 100%);
   color: white;
   border: none;
   outline: none;
   border-radius: 35px;
   padding: 15px 70px;
-  font-size: .8em;
+  font-size: 0.8em;
   font-weight: 500;
 }
-.FormField__ButtonSinup{
-  background-image: linear-gradient( rgb(209, 163, 24) 10%,rgb(173, 136, 23) 60%, rgb(141, 110, 19) 100% );
+.FormField__ButtonSinup {
+  background-image: linear-gradient(
+    rgb(209, 163, 24) 10%,
+    rgb(173, 136, 23) 60%,
+    rgb(141, 110, 19) 100%
+  );
   color: white;
   border: none;
   outline: none;
   border-radius: 35px;
   padding: 15px 70px;
-  font-size: .8em;
+  font-size: 0.8em;
   font-weight: 500;
 }
-.linkoub{
+.linkoub {
   margin-bottom: 40px;
   margin-top: -20px;
   display: flex;
-
 }
 
-
 .FormField__Link {
-  color: #66707D;
+  color: #66707d;
   text-decoration: none !important;
   display: inline-block;
-  border-bottom: 1.5px solid #225E62;
+  border-bottom: 1.5px solid #225e62;
   padding-bottom: 5px;
 }
 .FormField__Link:hover {
-  color: #66707D;
+  color: #66707d;
 }
 .FormField__LinkDiable {
   text-decoration: none !important;
-  color:white;
-  
+  color: white;
 }
 .FormField__LinkDiable:hover {
   color: white;
 }
 
 .FormField__CheckboxLabel {
-  color: #646F7D;
-  font-size: .9em;
+  color: #646f7d;
+  font-size: 0.9em;
 }
 
 .FormField__Checkbox {
@@ -174,29 +175,27 @@
 }
 
 .FormField__TermsLink {
-  color: #002CB6;
-  border-bottom: 1px solid #002CB6;
+  color: #002cb6;
+  border-bottom: 1px solid #002cb6;
   text-decoration: none;
   display: inline-block;
   padding-bottom: 2px;
   margin-left: 5px;
 }
-button:focus{
+button:focus {
   outline: none !important;
 }
-.Navli{
+.Navli {
   height: auto;
   align-content: center;
   padding-top: 10px;
   padding-bottom: 10px;
   list-style-type: none;
-
 }
-.bgcolor{
-  background-color: #F4F7FD;
-  
+.bgcolor {
+  background-color: #f4f7fd;
 }
-.ModalStyle{
+.ModalStyle {
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 0 5px #727171;
@@ -205,50 +204,45 @@ button:focus{
   margin: 0 auto;
   text-align: center;
   display: inline-block;
-  align-content: center
-
+  align-content: center;
 }
-.detailsContainer{
+.detailsContainer {
   width: 60%;
   margin: 0 auto;
   color: black;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 0 5px #727171;
-  text-align: center; 
+  text-align: center;
 }
-.FormCN{
+.FormCN {
   display: inline-block;
   min-width: 600px;
 }
-.SpanLibel{
-
+.SpanLibel {
 }
-.labelCN{
-  margin-left:-20px;
+.labelCN {
+  margin-left: -20px;
   width: 150px;
 }
-.rowCont{
-
+.rowCont {
 }
-.lastRow{
+.lastRow {
   margin-bottom: 60px;
 }
-.Spanlb{
+.Spanlb {
   width: 200px;
 }
-.midRow{
-  
+.midRow {
 }
-.MDBContainer{
+.MDBContainer {
   margin-top: 40px;
 }
-.AddPerson{
+.AddPerson {
   margin: 25px 80px 0 0;
 }
-.TextModal{
+.TextModal {
   width: 80%;
   margin: 0 auto;
   margin-top: 10px;
 }
-

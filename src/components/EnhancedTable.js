@@ -1,43 +1,41 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Paper from '@material-ui/core/Paper';
-import { DataBase } from '../pages/const';
-import { StitchAuthInfo } from '../pages/const';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TablePagination from "@material-ui/core/TablePagination";
+import TableRow from "@material-ui/core/TableRow";
+import TableSortLabel from "@material-ui/core/TableSortLabel";
+import Paper from "@material-ui/core/Paper";
+import { DataBase } from "../pages/const";
+import { StitchAuthInfo } from "../pages/const";
 
-
-import { stitchClient } from '../pages/const'
-import { RemoteMongoClient } from 'mongodb-stitch-browser-sdk';
-
+import { stitchClient } from "../pages/const";
+import { RemoteMongoClient } from "mongodb-stitch-browser-sdk";
 
 const mongodb = stitchClient.getServiceClient(
   RemoteMongoClient.factory,
   "mongodb-atlas"
 );
 const db = mongodb.db(DataBase);
-const collection = db.collection('Utilisateur');
+const collection = db.collection("Utilisateur");
 
 //set All Users in LocalStorage
 const Session = localStorage.getItem(StitchAuthInfo);
 if (Session !== null) {
-  collection.find().toArray()
+  collection
+    .find()
+    .toArray()
     .then(items => {
-      localStorage.setItem('DataTable', JSON.stringify(items));
+      localStorage.setItem("DataTable", JSON.stringify(items));
       return items;
     })
     .catch(err => console.error(`Failed to find documents: ${err}`));
 }
 
-
 function desc(a, b, orderBy) {
-
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -58,14 +56,21 @@ function stableSort(array, cmp) {
 }
 
 function getSorting(order, orderBy) {
-  return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
+  return order === "desc"
+    ? (a, b) => desc(a, b, orderBy)
+    : (a, b) => -desc(a, b, orderBy);
 }
 
 const headCells = [
-  { id: '_id', numeric: false, disablePadding: true, label: 'Num Compte' },
-  { id: 'email', numeric: true, disablePadding: false, label: 'Email' },
-  { id: 'nom_prenom', numeric: true, disablePadding: false, label: 'Nom complet' },
-  { id: 'Telephone', numeric: true, disablePadding: false, label: 'Téléphone' },
+  { id: "_id", numeric: false, disablePadding: true, label: "Num Compte" },
+  { id: "email", numeric: true, disablePadding: false, label: "Email" },
+  {
+    id: "nom_prenom",
+    numeric: true,
+    disablePadding: false,
+    label: "Nom complet"
+  },
+  { id: "Telephone", numeric: true, disablePadding: false, label: "Téléphone" }
 ];
 
 function EnhancedTableHead(props) {
@@ -77,14 +82,12 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-
-        </TableCell>
+        <TableCell padding="checkbox"></TableCell>
         {headCells.map(headCell => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'default'}
+            align={headCell.numeric ? "right" : "left"}
+            padding={headCell.disablePadding ? "none" : "default"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
@@ -95,7 +98,7 @@ function EnhancedTableHead(props) {
               {headCell.label}
               {orderBy === headCell.id ? (
                 <span className={classes.visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                  {order === "desc" ? "sorted descending" : "sorted ascending"}
                 </span>
               ) : null}
             </TableSortLabel>
@@ -111,44 +114,43 @@ EnhancedTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
+  rowCount: PropTypes.number.isRequired
 };
-
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%',
-    marginTop: theme.spacing(3),
+    width: "100%",
+    marginTop: theme.spacing(3)
   },
   paper: {
-    width: '100%',
-    marginBottom: theme.spacing(2),
+    width: "100%",
+    marginBottom: theme.spacing(2)
   },
   table: {
-    minWidth: 750,
+    minWidth: 750
   },
   tableWrapper: {
-    overflowX: 'auto',
+    overflowX: "auto"
   },
   visuallyHidden: {
     border: 0,
-    clip: 'rect(0 0 0 0)',
+    clip: "rect(0 0 0 0)",
     height: 1,
     margin: -1,
-    overflow: 'hidden',
+    overflow: "hidden",
     padding: 0,
-    position: 'absolute',
+    position: "absolute",
     top: 20,
-    width: 1,
-  },
+    width: 1
+  }
 }));
 
 function EnhancedTable({ rows }) {
   const classes = useStyles();
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('nom_prenom');
+  const [order, setOrder] = React.useState("asc");
+  const [orderBy, setOrderBy] = React.useState("nom_prenom");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense] = React.useState(false);
@@ -159,8 +161,8 @@ function EnhancedTable({ rows }) {
   // },[]);
 
   const handleRequestSort = (event, property) => {
-    const isDesc = orderBy === property && order === 'desc';
-    setOrder(isDesc ? 'asc' : 'desc');
+    const isDesc = orderBy === property && order === "desc";
+    setOrder(isDesc ? "asc" : "desc");
     setOrderBy(property);
   };
 
@@ -186,7 +188,7 @@ function EnhancedTable({ rows }) {
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
+        selected.slice(selectedIndex + 1)
       );
     }
 
@@ -202,10 +204,10 @@ function EnhancedTable({ rows }) {
     setPage(0);
   };
 
-
   const isSelected = _id => selected.indexOf(_id) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
     <div className={classes.root}>
@@ -214,7 +216,7 @@ function EnhancedTable({ rows }) {
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size={dense ? "small" : "medium"}
           >
             <EnhancedTableHead
               classes={classes}
@@ -242,10 +244,13 @@ function EnhancedTable({ rows }) {
                       key={row._id}
                       selected={isItemSelected}
                     >
-                      <TableCell padding="checkbox">
-
-                      </TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
+                      <TableCell padding="checkbox"></TableCell>
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
+                      >
                         {row._id}
                       </TableCell>
                       <TableCell align="right">{row.email}</TableCell>
@@ -269,10 +274,10 @@ function EnhancedTable({ rows }) {
           rowsPerPage={rowsPerPage}
           page={page}
           backIconButtonProps={{
-            'aria-label': 'previous page',
+            "aria-label": "previous page"
           }}
           nextIconButtonProps={{
-            'aria-label': 'next page',
+            "aria-label": "next page"
           }}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}

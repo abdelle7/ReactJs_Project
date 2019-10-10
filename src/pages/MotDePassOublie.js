@@ -1,26 +1,39 @@
-import React, { Component } from 'react';
-import AppAside from './AppAside'
-import { Formik } from 'formik';
-import * as Yup from 'yup';
-import { stitchClient } from './const';
-import Loader from 'react-loader-spinner'
+import React, { Component } from "react";
+import AppAside from "./AppAside";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import { stitchClient } from "./const";
+import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import { UserPasswordAuthProviderClient } from 'mongodb-stitch-browser-sdk';
+import { UserPasswordAuthProviderClient } from "mongodb-stitch-browser-sdk";
 
-const SendReset = (props) => {
+const SendReset = props => {
   if (props.display) {
-    return (<div style={{ color: 'red', fontWeight: 'bold', fontSize: '15px' }} id="results" className="search-results">
-      Email introuvable
-    </div>)
+    return (
+      <div
+        style={{ color: "red", fontWeight: "bold", fontSize: "15px" }}
+        id="results"
+        className="search-results"
+      >
+        Email introuvable
+      </div>
+    );
   } else if (props.sent) {
-    return (<div style={{ color: 'green', fontWeight: 'bold', fontSize: '15px' }} id="results" className="search-results">
-      Email de réinitialisation envoyé avec succès
-  </div>)
-  } else return null
+    return (
+      <div
+        style={{ color: "green", fontWeight: "bold", fontSize: "15px" }}
+        id="results"
+        className="search-results"
+      >
+        Email de réinitialisation envoyé avec succès
+      </div>
+    );
+  } else return null;
 };
 
-const emailPasswordClient = stitchClient.auth
-  .getProviderClient(UserPasswordAuthProviderClient.factory);
+const emailPasswordClient = stitchClient.auth.getProviderClient(
+  UserPasswordAuthProviderClient.factory
+);
 
 // const userForm={
 //   "aud": "eventdash-rezoi",
@@ -39,10 +52,10 @@ class MotDePassOublie extends Component {
     super();
 
     this.state = {
-      email: '',
+      email: "",
       isloading: false,
       display: false,
-      sent: false,
+      sent: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -51,7 +64,7 @@ class MotDePassOublie extends Component {
 
   handleChange(e) {
     let target = e.target;
-    let value = target.type === 'checkbox' ? target.checked : target.value;
+    let value = target.type === "checkbox" ? target.checked : target.value;
     let name = target.name;
 
     this.setState({
@@ -63,13 +76,17 @@ class MotDePassOublie extends Component {
     e.preventDefault();
     this.setState({ isloading: true });
     this.setState({ display: false });
-    emailPasswordClient.sendResetPasswordEmail(this.state.email)
+    emailPasswordClient
+      .sendResetPasswordEmail(this.state.email)
       .then(() => {
         this.setState({ isloading: false });
         this.setState({ sent: true });
-        console.log("Successfully sent password reset email!", this.state.email);
-        window.setTimeout(function () {
-          window.location = '/sign-in'
+        console.log(
+          "Successfully sent password reset email!",
+          this.state.email
+        );
+        window.setTimeout(function() {
+          window.location = "/sign-in";
         }, 2000);
       })
       .catch(err => {
@@ -79,7 +96,6 @@ class MotDePassOublie extends Component {
         this.setState({ isloading: false });
         console.log("Error sending password reset email", err);
       });
-
   }
 
   render() {
@@ -88,10 +104,10 @@ class MotDePassOublie extends Component {
         <AppAside />
 
         <div className="App__Form">
-
           <div className="FormCenter">
-
-            <h1 style={{ color: '#000', marginBottom: '40px' }}>Réinitialiser le mot de passe</h1>
+            <h1 style={{ color: "#000", marginBottom: "40px" }}>
+              Réinitialiser le mot de passe
+            </h1>
             <SendReset sent={this.state.sent} display={this.state.display} />
             <Formik
               onSubmit={(values, { setSubmitting }) => {
@@ -103,41 +119,61 @@ class MotDePassOublie extends Component {
               validationSchema={Yup.object().shape({
                 email: Yup.string()
                   .email("L'Email doit être valide")
-                  .required('Champs obligatoires')
+                  .required("Champs obligatoires")
               })}
             >
               {props => {
-                const {
-                  touched,
-                  errors,
-                  handleChange,
-                  handleBlur,
-
-                } = props;
+                const { touched, errors, handleChange, handleBlur } = props;
                 return (
                   <form onSubmit={this.handleSubmit} className="FormFields">
-
                     <div className="FormField">
-                      <label className="FormField__Label" htmlFor="email">E-mail</label>
-                      <input type="email" id="email" className={`FormField__Input ${errors.email && touched.email ? 'text-input error' : 'text-input'}`} placeholder="Entrez votre email" name="email" value={this.state.email} onBlur={handleBlur} onChange={e => {
-                        // call the built-in handleBur
-                        handleChange(e)
-                        // and do something about e
-                        let target = e.target;
-                        let value = target.type === 'checkbox' ? target.checked : target.value;
-                        let name = target.name;
-                        this.setState({
-                          [name]: value
-                        });
-                      }}
+                      <label className="FormField__Label" htmlFor="email">
+                        E-mail
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        className={`FormField__Input ${
+                          errors.email && touched.email
+                            ? "text-input error"
+                            : "text-input"
+                        }`}
+                        placeholder="Entrez votre email"
+                        name="email"
+                        value={this.state.email}
+                        onBlur={handleBlur}
+                        onChange={e => {
+                          // call the built-in handleBur
+                          handleChange(e);
+                          // and do something about e
+                          let target = e.target;
+                          let value =
+                            target.type === "checkbox"
+                              ? target.checked
+                              : target.value;
+                          let name = target.name;
+                          this.setState({
+                            [name]: value
+                          });
+                        }}
                       />
                       {errors.email && touched.email && (
-                        <div style={{ color: 'red' }} className="input-feedback">{errors.email}</div>
+                        <div
+                          style={{ color: "red" }}
+                          className="input-feedback"
+                        >
+                          {errors.email}
+                        </div>
                       )}
                     </div>
 
                     <div className="FormField d-flex">
-                      <button style={{ fontSize: '18px' }} className="FormField__ButtonSinup mr-20">Envoyer un email</button>
+                      <button
+                        style={{ fontSize: "18px" }}
+                        className="FormField__ButtonSinup mr-20"
+                      >
+                        Envoyer un email
+                      </button>
                       <span>
                         <Loader
                           type="Puff"

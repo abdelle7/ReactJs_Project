@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Route, Redirect } from "react-router-dom";
-import { StitchAuthInfo } from '../pages/const';
-
+import { StitchAuthInfo } from "../pages/const";
 
 class ProtectedRouteLogin extends Component {
   render() {
@@ -14,13 +13,11 @@ class ProtectedRouteLogin extends Component {
     return (
       <Route
         {...props}
-        render={props => (
-          auth ?
-            <Redirect to='/dashboard' /> :
-            <Component {...props} />
-        )}
+        render={props =>
+          auth ? <Redirect to="/dashboard" /> : <Component {...props} />
+        }
       />
-    )
+    );
   }
 }
 export default ProtectedRouteLogin;
