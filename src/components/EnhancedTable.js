@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -24,14 +24,11 @@ const mongodb = stitchClient.getServiceClient(
 const db = mongodb.db(DataBase);
 const collection = db.collection('Utilisateur');
 
-
-
-
+//set All Users in LocalStorage
 const Session = localStorage.getItem(StitchAuthInfo);
 if (Session !== null) {
   collection.find().toArray()
     .then(items => {
-      console.log(`Successfully found ${items.length} documents.`);
       localStorage.setItem('DataTable', JSON.stringify(items));
       return items;
     })
@@ -148,7 +145,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function EnhancedTable({rows}) {
+function EnhancedTable({ rows }) {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('nom_prenom');

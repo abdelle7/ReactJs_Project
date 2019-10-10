@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux'
 
-const initState={
-    AllUsers:[]
+const initState = {
+    AllUsers: []
 }
-const AllUsersReducer =  (state=initState,action) => {
-    if(action.type==='FETCH_USERS'){
-        console.log('Reducer',action.payload);
-      return action.payload
+const AllUsersReducer = (state = initState, action) => {
+    if (action.type === 'FETCH_USERS') {
+        return action.payload
     }
-    console.log('Reducer NULL');
-
+    else if (action.type === 'GET_ALL_DATA') {
+        return []
+    }
     return state.AllUsers
 };
 

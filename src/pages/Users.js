@@ -7,17 +7,16 @@ import { connect } from 'react-redux'
 const email = localStorage.getItem('email');
 function TestLocal() {
     if (JSON.parse(localStorage.getItem('DataTable')) === null) {
-      const rows1 = [];
-      return rows1
+        const rows1 = [];
+        return rows1
     } else {
-      const rows1 = JSON.parse(localStorage.getItem('DataTable'));
-      return rows1;
+        const rows1 = JSON.parse(localStorage.getItem('DataTable'));
+        return rows1;
     }
-  }
-
+}
 class Users extends Component {
     componentDidMount() {
-
+        this.props.dispatch({ type: 'GET_ALL_DATA' });
     }
     constructor() {
         super();
@@ -26,6 +25,8 @@ class Users extends Component {
         }
     }
     render() {
+        const rows = TestLocal();
+        //const rows = this.props.AllUsers;
         return (
             <div className="bgcolor w-100 d-inline-flex ">
                 <div className="w-100" style={{ height: 'fit-content', marginLeft: '300px' }}>
@@ -35,7 +36,7 @@ class Users extends Component {
                     </div>
 
                     <div className='mt-5' style={{ width: '90%', margin: '0 auto' }}>
-                        <EnhancedTable rows={TestLocal()}></EnhancedTable>
+                        <EnhancedTable rows={rows}></EnhancedTable>
                     </div>
 
                 </div>
@@ -44,8 +45,9 @@ class Users extends Component {
         )
     }
 }
+
 const mapStatToPropd = (state) => {
-    console.log('Users Data',state.AllUsers);
+    console.log('Users Data', state.AllUsers);
     return { AllUsers: state.AllUsers };
-  };
+};
 export default connect(mapStatToPropd)(Users);
