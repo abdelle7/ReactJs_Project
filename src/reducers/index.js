@@ -1,39 +1,16 @@
 import { combineReducers } from 'redux'
-import { stitchClient } from '../pages/const'
-import { RemoteMongoClient } from 'mongodb-stitch-browser-sdk';
-import { DataBase } from '../pages/const';
 
-const mongodb = stitchClient.getServiceClient(
-    RemoteMongoClient.factory,
-    "mongodb-atlas"
-);
-const db = mongodb.db(DataBase);
-const collection = db.collection('Utilisateur');
-
-async function fetch() {
-
-    return (
-        collection.find().toArray()
-            .then(items => {
-                // console.log(`Successfully found ${items.length} documents.`);
-                localStorage.setItem('DataTable', JSON.stringify(items));
-                return items;
-            })
-            .catch(err => console.error(`Failed to find documents: ${err}`))
-    )
+const initState={
+    AllUsers:[]
 }
+const AllUsersReducer =  (state=initState,action) => {
+    if(action.type==='FETCH_USERS'){
+        console.log('Reducer',action.payload);
+      return action.payload
+    }
+    console.log('Reducer NULL');
 
-async function GetDataFromFetch() {
-    return await fetch();
-}
-
-const AllUsersReducer = async () => {
-    const fetchData = await GetDataFromFetch();
-    // console.log('My Data', fetchData);
-    if (fetchData === undefined) {
-        return null
-    } else { return Array.from(fetchData) }
-
+    return state.AllUsers
 };
 
 export default combineReducers({

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -9,7 +9,6 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
-import { connect } from 'react-redux'
 import { DataBase } from '../pages/const';
 import { StitchAuthInfo } from '../pages/const';
 
@@ -38,19 +37,6 @@ if (Session !== null) {
     })
     .catch(err => console.error(`Failed to find documents: ${err}`));
 }
-
-
-
-function TestLocal() {
-  if (JSON.parse(localStorage.getItem('DataTable')) === null) {
-    const rows1 = [];
-    return rows1
-  } else {
-    const rows1 = JSON.parse(localStorage.getItem('DataTable'));
-    return rows1;
-  }
-}
-const rows = Array.from(TestLocal());
 
 
 function desc(a, b, orderBy) {
@@ -162,7 +148,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function EnhancedTable(props) {
+function EnhancedTable({rows}) {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('nom_prenom');
@@ -170,6 +156,10 @@ function EnhancedTable(props) {
   const [page, setPage] = React.useState(0);
   const [dense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(8);
+
+  // useEffect(() => {
+  //   this.props.fetch_users();
+  // },[]);
 
   const handleRequestSort = (event, property) => {
     const isDesc = orderBy === property && order === 'desc';
@@ -294,7 +284,5 @@ function EnhancedTable(props) {
     </div>
   );
 }
-const mapStatToPropd = (state) => {
-  return { AllUsers: state.AllUsers };
-};
-export default connect(mapStatToPropd)(EnhancedTable);
+
+export default EnhancedTable;

@@ -1,17 +1,23 @@
 import React, { Component } from 'react'
 import EnhancedTable from '../components/EnhancedTable'
 import ModalPop from '../components/Modal'
+import { connect } from 'react-redux'
+
 
 const email = localStorage.getItem('email');
-
+function TestLocal() {
+    if (JSON.parse(localStorage.getItem('DataTable')) === null) {
+      const rows1 = [];
+      return rows1
+    } else {
+      const rows1 = JSON.parse(localStorage.getItem('DataTable'));
+      return rows1;
+    }
+  }
 
 class Users extends Component {
     componentDidMount() {
 
-        if (!window.location.hash) {
-            window.location = window.location + '#load';
-            window.location.reload();
-        }
     }
     constructor() {
         super();
@@ -29,7 +35,7 @@ class Users extends Component {
                     </div>
 
                     <div className='mt-5' style={{ width: '90%', margin: '0 auto' }}>
-                        <EnhancedTable></EnhancedTable>
+                        <EnhancedTable rows={TestLocal()}></EnhancedTable>
                     </div>
 
                 </div>
@@ -38,5 +44,8 @@ class Users extends Component {
         )
     }
 }
-
-export default Users
+const mapStatToPropd = (state) => {
+    console.log('Users Data',state.AllUsers);
+    return { AllUsers: state.AllUsers };
+  };
+export default connect(mapStatToPropd)(Users);

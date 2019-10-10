@@ -167,7 +167,7 @@ class SignInForm extends Component {
 
 
                     <div className="FormField d-flex">
-                      <button type="submit" style={{ fontSize: '18px' }} className="FormField__Button mr-20">Se connecter</button>
+                      <button style={{ fontSize: '18px' }} className="FormField__Button mr-20">Se connecter</button>
                       <span>
                         <Loader
                           type="Puff"
