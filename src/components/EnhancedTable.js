@@ -9,6 +9,31 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Paper from "@material-ui/core/Paper";
+import { DataBase } from "../pages/const";
+import { StitchAuthInfo } from "../pages/const";
+
+import { stitchClient } from "../pages/const";
+import { RemoteMongoClient } from "mongodb-stitch-browser-sdk";
+
+const mongodb = stitchClient.getServiceClient(
+  RemoteMongoClient.factory,
+  "mongodb-atlas"
+);
+const db = mongodb.db(DataBase);
+const collection = db.collection("Utilisateur");
+
+//set All Users in LocalStorage
+const Session = localStorage.getItem(StitchAuthInfo);
+if (Session !== null) {
+  collection
+    .find()
+    .toArray()
+    .then(items => {
+      localStorage.setItem("DataTable", JSON.stringify(items));
+      return items;
+    })
+    .catch(err => console.error(`Failed to find documents: ${err}`));
+}
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
