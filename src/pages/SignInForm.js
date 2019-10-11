@@ -52,46 +52,6 @@ class SignInForm extends Component {
       completeForm: false
     };
 
-    this.handleChangeMe = this.handleChangeMe.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChangeMe(e) {
-    let target = e.target;
-    let value = target.type === "checkbox" ? target.checked : target.value;
-    let name = target.name;
-
-    this.setState({
-      [name]: value
-    });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    this.setState({ isloading: true });
-    this.setState({ display: false });
-    const credential = new UserPasswordCredential(
-      this.state.email,
-      this.state.password
-    );
-    stitchClient.auth
-      .loginWithCredential(credential)
-      .then(authedUser => {
-        console.log(`successfully logged in with id: ${authedUser.id}`);
-        localStorage.setItem("email", this.state.email);
-        collection.findOne({ email: this.state.email }).then(function(_user) {
-          localStorage.setItem("telephone", _user.Telephone);
-          localStorage.setItem("societe", _user.Societe);
-          localStorage.setItem("nom", _user.nom_prenom);
-          localStorage.setItem("email", _user.email);
-          window.location = "/dashboard";
-        });
-      })
-      .catch(err => {
-        console.error(`login failed with error: ${err}+${this.state.email}`);
-        this.setState({ display: true });
-        this.setState({ isloading: false });
-      });
   }
 
   render() {
@@ -112,38 +72,39 @@ class SignInForm extends Component {
                 setTimeout(() => {
                   if (values.email === "" || values.password === "") {
                     this.setState({ completeForm: true });
+                  } else {
+                    this.setState({ isloading: true });
+                    this.setState({ display: false });
+                    this.setState({ completeForm: false });
+                    const credential = new UserPasswordCredential(
+                      values.email,
+                      values.password
+                    );
+                    stitchClient.auth
+                      .loginWithCredential(credential)
+                      .then(authedUser => {
+                        console.log(
+                          `successfully logged in with id: ${authedUser.id}`
+                        );
+                        localStorage.setItem("email", values.email);
+                        collection
+                          .findOne({ email: values.email })
+                          .then(function(_user) {
+                            localStorage.setItem("telephone", _user.Telephone);
+                            localStorage.setItem("societe", _user.Societe);
+                            localStorage.setItem("nom", _user.nom_prenom);
+                            localStorage.setItem("email", _user.email);
+                            window.location = "/dashboard";
+                          });
+                      })
+                      .catch(err => {
+                        console.error(
+                          `login failed with error: ${err}`
+                        );
+                        this.setState({ display: true });
+                        this.setState({ isloading: false });
+                      });
                   }
-                  console.log("error");
-                  this.setState({ isloading: true });
-                  this.setState({ display: false });
-                  const credential = new UserPasswordCredential(
-                    values.email,
-                    values.password
-                  );
-                  stitchClient.auth
-                    .loginWithCredential(credential)
-                    .then(authedUser => {
-                      console.log(
-                        `successfully logged in with id: ${authedUser.id}`
-                      );
-                      localStorage.setItem("email", values.email);
-                      collection
-                        .findOne({ email: values.email })
-                        .then(function(_user) {
-                          localStorage.setItem("telephone", _user.Telephone);
-                          localStorage.setItem("societe", _user.Societe);
-                          localStorage.setItem("nom", _user.nom_prenom);
-                          localStorage.setItem("email", _user.email);
-                          window.location = "/dashboard";
-                        });
-                    })
-                    .catch(err => {
-                      console.error(
-                        `login failed with error: ${err}+${values.email}`
-                      );
-                      this.setState({ display: true });
-                      this.setState({ isloading: false });
-                    });
                   setSubmitting(false);
                 }, 500);
               }}

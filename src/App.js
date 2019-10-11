@@ -10,7 +10,7 @@ import DelailsCompte from "./pages/DetailsCompte";
 import Users from "./pages/Users";
 import Backoffice from "./pages/Backoffice";
 import "./App.css";
-import history from './history'
+import history from "./history";
 import "bootstrap/dist/css/bootstrap.min.css";
 import EmailConfirmation from "./pages/EmailConfirmation";
 import DataTable from "./pages/DataTable";
@@ -60,8 +60,8 @@ let navHeader = auth ? (
     linkColor="#ffffff"
   />
 ) : (
-    ""
-  );
+  ""
+);
 class App extends Component {
   render() {
     return (
