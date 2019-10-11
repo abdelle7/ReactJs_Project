@@ -97,7 +97,7 @@ class SignInForm extends Component {
   render() {
     return (
       <div className="w-100 d-inline-flex">
-        <AppAside />
+        <AppAside visible={true} />
         <div className="App__Form">
           <div className="FormCenter">
             <h1 style={{ color: "#000", marginBottom: "40px" }}>CONNEXION</h1>

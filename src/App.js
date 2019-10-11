@@ -10,6 +10,7 @@ import DelailsCompte from "./pages/DetailsCompte";
 import Users from "./pages/Users";
 import Backoffice from "./pages/Backoffice";
 import "./App.css";
+import history from './history'
 import "bootstrap/dist/css/bootstrap.min.css";
 import EmailConfirmation from "./pages/EmailConfirmation";
 import DataTable from "./pages/DataTable";
@@ -59,12 +60,12 @@ let navHeader = auth ? (
     linkColor="#ffffff"
   />
 ) : (
-  ""
-);
+    ""
+  );
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter history={history}>
         <div className="App">
           {navHeader}
           {/*<div className="PageSwitcher">
@@ -77,19 +78,19 @@ class App extends Component {
               exact
               path="/"
               component={() => (auth ? <Dashboard /> : <SignUpForm />)}
-            ></Route>
+            />
             <Route
               path="/sign-in"
               component={() => (auth ? <Dashboard /> : <SignInForm />)}
-            ></Route>
+            />
             <Route
               path="/emailconfirmation"
               component={() => (auth ? <Dashboard /> : <EmailConfirmation />)}
-            ></Route>
+            />
             <Route
               path="/CreatePassword"
               component={() => (auth ? <Dashboard /> : <CreatePassword />)}
-            ></Route>
+            />
             <Route
               path="/MotDePassOublie"
               component={() => (auth ? <Dashboard /> : <MotDePassOublie />)}
@@ -97,7 +98,7 @@ class App extends Component {
             <Route
               path="/ResetPassword"
               component={() => (auth ? <Dashboard /> : <ResetPassword />)}
-            ></Route>
+            />
 
             {/* <ProtectedRouteLogin  path="/" component={SignUpForm} />
               <ProtectedRouteLogin  path="/sign-in" component={SignInForm} />
