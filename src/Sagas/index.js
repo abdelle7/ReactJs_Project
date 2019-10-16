@@ -12,8 +12,12 @@ const db = mongodb.db(DataBase);
 const collection = db.collection("Utilisateur");
 
 export function* getUsersSaga() {
-  const result = yield collection.find().toArray();
-  yield put(fetch_users(result));
+  try {
+    const result = yield collection.find().toArray();
+    yield put(fetch_users(result));
+  } catch (err) {
+    console.log('error');
+  }
 }
 export function* watchUsers() {
   yield takeEvery("GET_ALL_DATA", getUsersSaga);

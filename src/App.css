@@ -126,6 +126,12 @@
   font-size: 0.8em;
   font-weight: 500;
 }
+.FormField__Button:active {
+  background-image: linear-gradient(#097030 10%, #075223 60%, #053617 100%);
+}
+.FormField__Button:focus {
+  outline: none;
+}
 .FormField__ButtonSinup {
   background-image: linear-gradient(
     rgb(209, 163, 24) 10%,
@@ -139,6 +145,16 @@
   padding: 15px 70px;
   font-size: 0.8em;
   font-weight: 500;
+}
+.FormField__ButtonSinup:active {
+  background-image: linear-gradient(
+    rgb(155, 121, 18) 10%,
+    rgb(130, 102, 17) 60%,
+    rgb(109, 86, 14) 100%
+  );
+}
+.FormField__ButtonSinup:focus {
+  outline: none;
 }
 .linkoub {
   margin-bottom: 40px;

@@ -205,7 +205,7 @@ class SignUpForm extends Component {
                     </div>
 
                     <div className="FormField">
-                      <label className="FormField__Label" htmlFor="sosiete">
+                      <label className="FormField__Label" htmlFor="societe">
                         Société
                       </label>
                       <input

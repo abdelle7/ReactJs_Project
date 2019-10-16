@@ -51,7 +51,6 @@ class SignInForm extends Component {
       isloading: false,
       completeForm: false
     };
-
   }
 
   render() {
@@ -98,9 +97,7 @@ class SignInForm extends Component {
                           });
                       })
                       .catch(err => {
-                        console.error(
-                          `login failed with error: ${err}`
-                        );
+                        console.error(`login failed with error: ${err}`);
                         this.setState({ display: true });
                         this.setState({ isloading: false });
                       });
@@ -198,6 +195,7 @@ class SignInForm extends Component {
 
                     <div className="FormField d-flex">
                       <button
+                        type="submit"
                         style={{ fontSize: "18px" }}
                         className="FormField__Button mr-20"
                       >
